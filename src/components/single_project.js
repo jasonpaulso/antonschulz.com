@@ -12,6 +12,8 @@ class Project extends Component {
   constructor() {
     super();
     this.state = {
+      
+      timestamp: 'Thu Mar 08 2018 15:06:23 GMT-0800 (PST)',
       projects: [],
       project: {
         name: '',
@@ -27,9 +29,10 @@ class Project extends Component {
     const projectsRef = firebase.database().ref('projects');
     projectsRef.on('value', snapshot => {
       let projects = snapshot.val();
-      console.log(projects);
+      
       this.setState(
         {
+          id: this.props.match.params.id,
           projects: projects,
         },
         () => {
@@ -67,14 +70,14 @@ class Project extends Component {
   loadProject(projectId, navLinkClicked) {
     this.setState(
       {
-        project: this.state.projects[projectId],
+        project: this.state.projects[this.state.id],
         scrolled: true,
       },
       () => {
         if (!this.props.backGroundIsSet || navLinkClicked) {
           this.props.backgroundHandler(this.state.project.hero);
-          console.log(this.state.project);
         }
+        window.scrollTo(0,0)
       }
     );
   }
@@ -84,18 +87,41 @@ class Project extends Component {
   }
 
   componentDidUpdate(prevProps) {
+
     if (this.props.location !== prevProps.location) {
-      this.loadProject(this.props.match.params.id, true);
+      this.setState({
+        id: this.props.match.params.id
+      }, () => {this.loadProject(this.state.id, true);})
+      
     }
   }
 
-  componentWillReceiveProps(nextProps) {}
 
-  renderProjectDetail() {
+
+  render() {
+
+    
+
+    const {projects, id, timestamp} = this.state;
+
     const { name, hero, description, images, credits } = this.state.project;
 
+    // const {  } = this.state
+
     return (
-      <section className={'project_container'}>
+      <span className={'project_outer_container'}>
+        {name &&
+          hero &&
+          description &&
+          images && 
+          timestamp &&
+          id &&  
+          (
+            <span>
+              <DocumentTitle title={`Anton Schulz | ${name}`} />
+              <Navigation backButton={false} />
+              <div className={'project_outer_container'}>
+                <section className={'project_container'}>
         {name &&
           hero &&
           description &&
@@ -141,31 +167,6 @@ class Project extends Component {
             </span>
           )}
       </section>
-    );
-  }
-
-  render() {
-    const projects = this.state;
-
-    const { name, hero, description, images, credits } = this.state.project;
-
-    return (
-      <span className={'project_outer_container'}>
-        {name &&
-          hero &&
-          description &&
-          images && (
-            <span>
-              <DocumentTitle title={`Anton Schulz | ${name}`} />
-              <Navigation backButton={false} />
-              <div className={'project_outer_container'}>
-                {this.renderProjectDetail(
-                  name,
-                  hero,
-                  description,
-                  images,
-                  credits
-                )}
               </div>
             </span>
           )}

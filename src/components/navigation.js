@@ -9,19 +9,8 @@ class Navigation extends Component {
       backButton: false,
     };
   }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.location !== prevProps.location) {
-      // window.scrollTo(0, 0)
-      // this.loadProject(this.props.match.params.id, true)
-
-      console.log(this.props.location, prevProps.location);
-    }
-  }
-
   componentDidMount() {
-    console.log(document.referrer);
-    // console.log()
+
     if (
       document.referrer &&
       document.location.href !== document.location.origin + '/' &&
@@ -44,9 +33,9 @@ class Navigation extends Component {
           </span>
           <span className={'navigation nav_top_right'}>
             {this.state.backButton ? (
-              <a href={document.referrer}>Back</a>
+              <Link to={document.referrer}>Back</Link>
             ) : (
-              <a href="/about">About</a>
+              <Link to={'/about'}>About</Link>
             )}
           </span>
         </div>

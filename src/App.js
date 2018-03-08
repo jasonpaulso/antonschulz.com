@@ -34,7 +34,7 @@ class App extends Component {
             {
               backgroundInner: null,
             },
-            () => window.scrollTo(0, 0)
+            // () => window.scrollTo(0, 0)
           );
         }
       );
@@ -51,12 +51,14 @@ class App extends Component {
             {
               backgroundOuter: null,
             },
-            () => window.scrollTo(0, 0)
+            // () => window.scrollTo(0, 0)
           );
         }
       );
     }
   }
+
+
 
   clearBackground() {
     this.setState(
@@ -116,6 +118,8 @@ class App extends Component {
                   backgroundHandler={this.handleBackgroundRender.bind(this)}
                   backGroundIsSet={backGroundIsSet}
                   onClearBackground={this.clearBackground.bind(this)}
+                  timestamp={new Date().toString()}
+                  location={props.location}
                   {...props}
                 />
               )}
