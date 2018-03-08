@@ -99,8 +99,7 @@ class Project extends Component {
         {name &&
           hero &&
           description &&
-          images &&
-          credits && (
+          images && (
             <span>
               <div className={'project_title_container'}>
                 <Fade>
@@ -119,7 +118,7 @@ class Project extends Component {
                 })}
               </div>
               <span>
-                {credits.length > 0 && (
+                {credits && credits.length > 0 && (
                   <div className={'project_credits_container'}>
                     {credits.map(credit => {
                       return (
@@ -155,8 +154,7 @@ class Project extends Component {
         {name &&
           hero &&
           description &&
-          images &&
-          credits && (
+          images && (
             <span>
               <DocumentTitle title={`Anton Schulz | ${name}`} />
               <Navigation backButton={false} />

@@ -121,6 +121,16 @@ class App extends Component {
               )}
             />
             <Route path="/about" component={withRouter(About)} />
+            <Route 
+              path='*'
+              render={props => (
+                <Home
+                  backgroundHandler={this.handleBackgroundRender.bind(this)}
+                  onClearBackground={this.clearBackground.bind(this)}
+                  {...props}
+                />
+              )}
+              />
           </Switch>
         </span>
       </BrowserRouter>
