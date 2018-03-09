@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import firebase from '../db/firebase';
-// import filereader from 'filereader';
+// import filereader from 'filereader'
 
 import { Form, Text, TextArea } from 'react-form';
 import Dropzone from 'react-dropzone';
@@ -18,20 +18,20 @@ class ProjectForm extends Component {
     };
   }
 
-  onDropMultiple(imageFiles) {
+  onDropMultiple = imageFiles => {
     if (imageFiles) {
       for (var imageFileIndex in imageFiles) {
         const imageFile = imageFiles[imageFileIndex];
         this.processImage(imageFile);
       }
     }
-  }
+  };
 
-  processImage(imageFile, isHeroImage) {
+  processImage = (imageFile, isHeroImage) => {
     const storageRef = firebase.storage().ref();
     const reader = new FileReader();
     reader.onload = () => {
-      // const fileAsBinaryString = reader.result;
+      // const fileAsBinaryString = reader.result
       const name = +new Date() + '-' + imageFile.name;
       const metadata = { contentType: imageFile.type };
       const task = storageRef.child(name).put(imageFile, metadata);
@@ -53,13 +53,13 @@ class ProjectForm extends Component {
     reader.onabort = () => console.log('file reading was aborted');
     reader.onerror = () => console.log('file reading has failed');
     reader.readAsBinaryString(imageFile);
-  }
+  };
 
-  onDrop(imageFiles) {
+  onDrop = imageFiles => {
     this.processImage(imageFiles[0], true);
-  }
+  };
 
-  submitForm(submittedValues) {
+  submitForm = submittedValues => {
     const credits = submittedValues.credits;
     this.setState(
       {
@@ -69,9 +69,9 @@ class ProjectForm extends Component {
       },
       () => this.handleSubmit()
     );
-  }
+  };
 
-  handleSubmit() {
+  handleSubmit = () => {
     const projectsRef = firebase.database().ref('projects');
     const { name, description, heroImage, imageFiles, credits } = this.state;
     const project = {
@@ -83,7 +83,7 @@ class ProjectForm extends Component {
       const key = snap.key;
 
       for (var imageUrl in imageFiles) {
-        console.log(imageFiles[imageUrl]);
+        // console.log(imageFiles[imageUrl])
         firebase
           .database()
           .ref('/projects/' + key + '/images/')
@@ -104,9 +104,9 @@ class ProjectForm extends Component {
       imageFiles: [],
       credits: [],
     });
-  }
+  };
 
-  render() {
+  render = () => {
     return (
       <div>
         <DocumentTitle title={`Anton Schulz | Add Project`} />
@@ -195,20 +195,20 @@ class ProjectForm extends Component {
         </section>
       </div>
     );
-  }
+  };
 }
 
 export default ProjectForm;
 
 // processImage(key, imageFiles, isHeroImage) {
-//   const storageRef = firebase.storage().ref();
+//   const storageRef = firebase.storage().ref()
 //   imageFiles.forEach( imageFile => {
-//     const reader = new FileReader();
+//     const reader = new FileReader()
 //     reader.onload = () => {
-//       const fileAsBinaryString = reader.result;
-//       const name = (+new Date()) + '-' + imageFile.name;
-//       const metadata = { contentType: imageFile.type };
-//       const task = storageRef.child(name).put(imageFile, metadata);
+//       const fileAsBinaryString = reader.result
+//       const name = (+new Date()) + '-' + imageFile.name
+//       const metadata = { contentType: imageFile.type }
+//       const task = storageRef.child(name).put(imageFile, metadata)
 //       task.then((snapshot) => {
 //         const imageWithUrl = {url: snapshot.downloadURL}
 //         if (isHeroImage) {
@@ -219,8 +219,8 @@ export default ProjectForm;
 
 //       })
 //     }
-//     reader.onabort = () => console.log('file reading was aborted');
-//     reader.onerror = () => console.log('file reading has failed');
-//     reader.readAsBinaryString(imageFile);
+//     reader.onabort = () => console.log('file reading was aborted')
+//     reader.onerror = () => console.log('file reading has failed')
+//     reader.readAsBinaryString(imageFile)
 //   })
 // }

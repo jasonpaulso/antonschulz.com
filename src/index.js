@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter, Route } from 'react-router-dom';
-// import Home from './components/home';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -16,7 +15,6 @@ ReactDOM.render(
 registerServiceWorker();
 
 window.onload = () => {
-
   var touchsupport =
     'ontouchstart' in window ||
     navigator.maxTouchPoints > 0 ||
@@ -25,7 +23,4 @@ window.onload = () => {
   if (!touchsupport) {
     document.documentElement.className += ' non-touch';
   }
-
-  
-}
-
+};

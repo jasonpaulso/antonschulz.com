@@ -8,14 +8,12 @@ import Fade from 'react-reveal/Fade';
 
 import viewportunitsfix from 'viewport-units-buggyfill';
 
-
-
 import { BrowserRouter, Route, withRouter, Switch } from 'react-router-dom';
 
 class App extends Component {
   constructor() {
     super();
-    viewportunitsfix.init()
+    viewportunitsfix.init();
     this.state = {
       outerBackgroundIsActive: true,
       backgroundOuter: null,
@@ -25,18 +23,18 @@ class App extends Component {
     };
   }
 
-  componentDidMount(){
-    const isTouch = !(document.getElementById('document').className === ' non-touch')
+  componentDidMount = () => {
+    const isTouch = !(
+      document.getElementById('document').className === ' non-touch'
+    );
     if (isTouch) {
       this.setState({
-        isTouch: isTouch
-      })
+        isTouch: isTouch,
+      });
     }
-  }
+  };
 
-
-
-  handleBackgroundRender(image) {
+  handleBackgroundRender = image => {
     if (this.state.outerBackgroundIsActive) {
       this.setState(
         {
@@ -46,12 +44,9 @@ class App extends Component {
           backGroundIsSet: true,
         },
         () => {
-          this.setState(
-            {
-              backgroundInner: null,
-            }
-          
-          );
+          this.setState({
+            backgroundInner: null,
+          });
         }
       );
     } else {
@@ -63,38 +58,38 @@ class App extends Component {
           backGroundIsSet: true,
         },
         () => {
-          this.setState(
-            {
-              backgroundOuter: null,
-            }
-          );
+          this.setState({
+            backgroundOuter: null,
+          });
         }
       );
     }
-  }
+  };
 
-  clearBackground() {
+  clearBackground = () => {
     if (this.state.isTouch) {
-      this.setState({
-        backgroundInner: null,
-        backgroundOuter: null,    
-      }, () => {
-        this.setState({
-          backGroundIsSet: false,
-          backgroundContainerVisable: false,
-          outerBackgroundIsActive: !this.state.outerBackgroundIsActive,
-        })
-      })
+      this.setState(
+        {
+          backgroundInner: null,
+          backgroundOuter: null,
+        },
+        () => {
+          this.setState({
+            backGroundIsSet: false,
+            backgroundContainerVisable: false,
+            outerBackgroundIsActive: !this.state.outerBackgroundIsActive,
+          });
+        }
+      );
     } else {
       this.setState({
         backgroundContainerVisable: false,
         outerBackgroundIsActive: !this.state.outerBackgroundIsActive,
         backGroundIsSet: false,
-      })
+      });
     }
-    
-  }
-  render() {
+  };
+  render = () => {
     const {
       backgroundOuter,
       backgroundInner,
@@ -163,7 +158,7 @@ class App extends Component {
         </span>
       </BrowserRouter>
     );
-  }
+  };
 }
 
 export default App;

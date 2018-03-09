@@ -12,25 +12,23 @@ class Home extends Component {
       page_title: 'Home',
       projects: [],
       clicked: false,
-      isTouch: false
+      isTouch: false,
     };
   }
 
-
-
-  componentDidMount() {
-
-    const isNonTouch = (document.getElementById('document').className === ' non-touch')
-    console.log(isNonTouch)
+  componentDidMount = () => {
+    const isNonTouch =
+      document.getElementById('document').className === ' non-touch';
+    console.log(isNonTouch);
     if (!isNonTouch) {
       // eslint-disable-next-line
       () => {
         this.setState({
-          isTouch: !isNonTouch
-        })
-      }
+          isTouch: !isNonTouch,
+        });
+      };
     }
-  
+
     const projectsRef = firebase.database().ref('projects');
     projectsRef.on('value', snapshot => {
       let projects = snapshot.val();
@@ -38,20 +36,21 @@ class Home extends Component {
         projects: projects,
       });
     });
-  }
+  };
 
-  componentWillMount(){
-    const isNonTouch = (document.getElementById('document').className === ' non-touch')
-    console.log(isNonTouch)
+  componentWillMount = () => {
+    const isNonTouch =
+      document.getElementById('document').className === ' non-touch';
+    console.log(isNonTouch);
     if (!isNonTouch) {
       // eslint-disable-next-line
       () => {
         this.setState({
-          isTouch: !isNonTouch
-        })
-      }
+          isTouch: !isNonTouch,
+        });
+      };
     }
-  }
+  };
 
   render() {
     const { projects, page_title, isTouch } = this.state;
@@ -62,7 +61,9 @@ class Home extends Component {
         <span key={project.name}>
           <Link
             to={{ pathname: `/projects/${index}` }}
-            onMouseEnter={isTouch ? null : () => backgroundHandler(project.hero)}
+            onMouseEnter={
+              isTouch ? null : () => backgroundHandler(project.hero)
+            }
           >
             {project.name}
           </Link>

@@ -9,8 +9,7 @@ class Navigation extends Component {
       backButton: false,
     };
   }
-  componentDidMount() {
-
+  componentDidMount = () => {
     if (
       document.referrer &&
       document.location.href !== document.location.origin + '/' &&
@@ -20,14 +19,14 @@ class Navigation extends Component {
         backButton: true,
       });
     }
-  }
+  };
 
-  goBack(event) {
-    event.preventDefault()
-    window.history.back()
-  }
+  goBack = event => {
+    event.preventDefault();
+    window.history.back();
+  };
 
-  render() {
+  render = () => {
     return (
       <div className={'navigation'}>
         <div className={'nav top_nav'}>
@@ -38,7 +37,9 @@ class Navigation extends Component {
           </span>
           <span className={'navigation nav_top_right'}>
             {this.state.backButton ? (
-              <a href="#back" onClick={this.goBack.bind(this)}>Back</a>
+              <a href="#back" onClick={this.goBack.bind(this)}>
+                Back
+              </a>
             ) : (
               <Link to={'/about'}>About</Link>
             )}
@@ -47,7 +48,7 @@ class Navigation extends Component {
         <BottomNav />
       </div>
     );
-  }
+  };
 }
 
 export default Navigation;

@@ -1,27 +1,28 @@
 import React, { Component } from 'react';
 
 class BottomNav extends Component {
-
   componentDidMount() {
-    window.addEventListener('scroll', (event) => {
-      this.closeContactMenu(event)
+    window.addEventListener('scroll', event => {
+      this.closeContactMenu(event);
     });
   }
-  openContactMenu(event) {
-    event.preventDefault()
+
+  openContactMenu = event => {
+    event.preventDefault();
     document.getElementById('contact_list').classList.add('show');
     document.getElementById('contact_open_link').classList.add('hidden');
-  }
-  closeContactMenu(event) {
-    event.preventDefault()
+  };
+
+  closeContactMenu = event => {
+    event.preventDefault();
     document.getElementById('contact_list').classList.remove('show');
     document.getElementById('contact_open_link').classList.remove('hidden');
-  }
+  };
 
-  render() {
+  render = () => {
     return (
       <div id={'bottom_nav'} className={'nav bottom_nav'}>
-        <span className={'copywrite nav_bottom_left'}>&copy; 2018</span>
+        <span className={'copywrite nav_bottom_left'}>&copy 2018</span>
         <ul
           id={'contact_list'}
           className={'contact nav_bottom_right'}
@@ -51,14 +52,19 @@ class BottomNav extends Component {
           </li>
 
           <li>
-            <a href="" id={'contact_open_link'} className={'contact_link'} onClick={(event) => this.openContactMenu(event)}>
+            <a
+              href=""
+              id={'contact_open_link'}
+              className={'contact_link'}
+              onClick={event => this.openContactMenu(event)}
+            >
               Connect
             </a>
           </li>
         </ul>
       </div>
     );
-  }
+  };
 }
 
 export default BottomNav;

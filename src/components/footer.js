@@ -10,12 +10,8 @@ class Footer extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.loadFooter();
-  }
-
-  handleOnClick = projectId => {
-    // this.props.handleProjectChange(projectId, true)
   };
 
   handleVisibilityChange = isVisible => {
@@ -27,15 +23,15 @@ class Footer extends Component {
     }
   };
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps = nextProps => {
     if (nextProps.isVisible) {
       this.handleVisibilityChange(nextProps.isVisible);
     } else {
       this.loadFooter();
     }
-  }
+  };
 
-  loadFooter() {
+  loadFooter = () => {
     const radix = 10;
     const currentPage = parseInt(this.props.currentPage, radix);
     const numberOfPages = this.props.pages;
@@ -45,9 +41,9 @@ class Footer extends Component {
         this.props.currentPage - 1 >= 0 ? currentPage - 1 : numberOfPages - 1,
     });
     this.handleVisibilityChange(false);
-  }
+  };
 
-  render() {
+  render = () => {
     return (
       <footer>
         <div className="footer_top_nav">
@@ -65,7 +61,7 @@ class Footer extends Component {
         </div>
       </footer>
     );
-  }
+  };
 }
 
 export default withRouter(Footer);

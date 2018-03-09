@@ -24,7 +24,7 @@ class Project extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     const projectsRef = firebase.database().ref('projects');
     projectsRef.on('value', snapshot => {
       let projects = snapshot.val();
@@ -39,8 +39,9 @@ class Project extends Component {
         }
       );
     });
-  }
-  loadProject(projectId, navLinkClicked) {
+  };
+
+  loadProject = (projectId, navLinkClicked) => {
     this.setState(
       {
         project: this.state.projects[this.state.id],
@@ -53,13 +54,13 @@ class Project extends Component {
         window.scrollTo(0, 0);
       }
     );
-  }
+  };
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     this.props.onClearBackground();
-  }
+  };
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate = prevProps => {
     if (this.props.location !== prevProps.location) {
       this.setState(
         {
@@ -70,9 +71,9 @@ class Project extends Component {
         }
       );
     }
-  }
+  };
 
-  render() {
+  render = () => {
     const { id, timestamp } = this.state;
 
     const { name, hero, description, images, credits } = this.state.project;
@@ -116,18 +117,18 @@ class Project extends Component {
                             }
                           })}
                         </div>
-                          {credits &&
-                            credits.length > 0 && (
-                              <div className={'project_credits_container'}>
-                                {credits.map(credit => {
-                                  return (
-                                    <p key={credit.title}>
-                                      {credit.title}: {credit.name}
-                                    </p>
-                                  );
-                                })}
-                              </div>
-                            )}
+                        {credits &&
+                          credits.length > 0 && (
+                            <div className={'project_credits_container'}>
+                              {credits.map(credit => {
+                                return (
+                                  <p key={credit.title}>
+                                    {credit.title}: {credit.name}
+                                  </p>
+                                );
+                              })}
+                            </div>
+                          )}
                         <TrackVisibility offset={50}>
                           <Footer
                             currentPage={this.props.match.params.id}
@@ -144,7 +145,7 @@ class Project extends Component {
           )}
       </span>
     );
-  }
+  };
 }
 
 export default Project;

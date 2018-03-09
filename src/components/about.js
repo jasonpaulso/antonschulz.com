@@ -14,7 +14,7 @@ class About extends Component {
     };
   }
 
-  render() {
+  render = () => {
     return (
       <div className={'about'}>
         <Navigation showBackButton={true} />
@@ -25,7 +25,7 @@ class About extends Component {
         </div>
       </div>
     );
-  }
+  };
 }
 
 export default About;
