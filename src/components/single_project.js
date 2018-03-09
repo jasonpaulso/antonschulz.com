@@ -144,7 +144,6 @@ class Project extends Component {
                             }
                           })}
                         </div>
-                        <span>
                           {credits &&
                             credits.length > 0 && (
                               <div className={'project_credits_container'}>
@@ -157,7 +156,6 @@ class Project extends Component {
                                 })}
                               </div>
                             )}
-                        </span>
                         <TrackVisibility offset={50}>
                           <Footer
                             currentPage={this.props.match.params.id}
