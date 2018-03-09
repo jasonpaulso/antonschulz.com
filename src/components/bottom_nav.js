@@ -21,14 +21,16 @@ class BottomNav extends Component {
           onMouseLeave={this.closeContactMenu}
         >
           <li className={'hidden'}>
-            <a href="">Email</a>
+            <a href="https://www.instagram.com/antonschulz" target="_blank">Instagram</a>
+          </li>
+                    <li className={'hidden'}>
+            <a href="https://www.linkedin.com/in/antonschulz" target="_blank">LinkedIn</a>
           </li>
           <li className={'hidden'}>
-            <a href="">LinkedIn</a>
+            <a href="mailto:hello@antonschulz.com">Email</a>
           </li>
-          <li className={'hidden'}>
-            <a href="">Instagram</a>
-          </li>
+
+          
           <li>
             <a href="" id={'contact_open_link'} className={'contact_link'}>
               Connect
