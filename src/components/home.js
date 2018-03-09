@@ -17,18 +17,16 @@ class Home extends Component {
     };
   }
 
-  componentWillUpdate() {
-    const isTouch = !(document.getElementById('document').className === ' non-touch')
+
+
+  componentDidMount() {
+    const isTouch = (document.getElementById('document').className === ' non-touch')
     if (isTouch) {
       this.setState({
         isTouch: isTouch
       })
     }
-   
-  }
-
-  componentDidMount() {
-    console.log(this.state.isTouch)
+    // console.log(this.state.isTouch)
     const projectsRef = firebase.database().ref('projects');
     projectsRef.on('value', snapshot => {
       let projects = snapshot.val();
