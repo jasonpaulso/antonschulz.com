@@ -33,7 +33,7 @@ class App extends Component {
           this.setState(
             {
               backgroundInner: null,
-            },
+            }
             // () => window.scrollTo(0, 0)
           );
         }
@@ -50,15 +50,13 @@ class App extends Component {
           this.setState(
             {
               backgroundOuter: null,
-            },
+            }
             // () => window.scrollTo(0, 0)
           );
         }
       );
     }
   }
-
-
 
   clearBackground() {
     this.setState(
@@ -125,8 +123,8 @@ class App extends Component {
               )}
             />
             <Route path="/about" component={withRouter(About)} />
-            <Route 
-              path='*'
+            <Route
+              path="*"
               render={props => (
                 <Home
                   backgroundHandler={this.handleBackgroundRender.bind(this)}
@@ -134,7 +132,7 @@ class App extends Component {
                   {...props}
                 />
               )}
-              />
+            />
           </Switch>
         </span>
       </BrowserRouter>

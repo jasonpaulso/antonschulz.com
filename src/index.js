@@ -16,6 +16,8 @@ ReactDOM.render(
 registerServiceWorker();
 
 window.onload = () => {
+
+  console.log("working")
   var touchsupport =
     'ontouchstart' in window ||
     navigator.maxTouchPoints > 0 ||

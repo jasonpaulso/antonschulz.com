@@ -13,10 +13,14 @@
      font-style: normal;
      font-weight: 400;
 }
+
+
  * {
      -webkit-font-smoothing: antialiased;
      -moz-osx-font-smoothing: grayscale;
 }
+
+
  @media (min-width:320px) {
     /* smartphones, iPhone, portrait 480x320 phones */
      .bottom_nav {
@@ -47,7 +51,7 @@
          padding: 0px 15px 0px 15px;
          font-size: 14px;
     }
-     #background_outer {
+     #background_outer, #background_inner {
          height: 40vh;
     }
      .project_credits_container {
@@ -99,6 +103,11 @@
     .project_blurb_container, .project_credits_container {
      height: 35vh;
    }
+
+   .about_description {
+    margin: 0px 134px;
+    font-size: 18px;
+   }
 }
  @media (min-width:961px) and (orientation: landscape) {
     /* tablet, landscape iPad, lo-res laptops ands desktops */
@@ -131,6 +140,12 @@
     #background_outer{
          height: 100vh;
     }
+
+    #background_inner {
+         z-index: -2;
+        height:100vh;
+    }
+
      .project_credits_container {
          font-size: 22px;
     }
@@ -193,10 +208,7 @@
 
 #background_outer.visible_background, #background_inner.visible_background, .visible_background {}
 
-#background_inner {
-  z-index: -2;
-  height:100vh;
-}
+
 
 .blurb-container {
      height: 50vh;
@@ -257,9 +269,7 @@
      padding: 0px;
      padding-left: 15px;
 }
-/* .contact li {
-     display: inline;
-}*/
+
  .hidden, #contact_open_link.hidden {
      display: none;
 }
@@ -271,8 +281,11 @@
      /*opacity: 0;*/
 }
 
- .project_heroes {
+ .project_hero_container {
      background-color: gray;
+     padding: 0px;
+     margin: 0px;
+     line-height: 0
 }
  .contact li:not(:last-of-type) {
      margin: 0px;
@@ -361,4 +374,5 @@
      transition: color 0.5s;
      color: white;
 }
- 
+
+

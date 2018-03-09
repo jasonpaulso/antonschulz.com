@@ -4,6 +4,7 @@ import Navigation from './navigation';
 import { Link } from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
 import firebase from '../db/firebase';
+import Hoverable from '../hoverable';
 
 class Home extends Component {
   constructor() {
@@ -33,12 +34,14 @@ class Home extends Component {
     const projectRow = (project, index) => {
       return (
         <span key={project.name}>
+        <Hoverable>
           <Link
             to={{ pathname: `/projects/${index}` }}
             onMouseEnter={() => backgroundHandler(project.hero)}
           >
             {project.name}
           </Link>
+          </Hoverable>
         </span>
       );
     };
@@ -51,6 +54,7 @@ class Home extends Component {
             <DocumentTitle title={`Anton Schulz | ${page_title}`} />
             <section>
               <Fade>
+                <Hoverable>
                 <div
                   ref={'project'}
                   className={'projects'}
@@ -67,6 +71,7 @@ class Home extends Component {
                     })}
                   </div>
                 </div>
+              </Hoverable>
               </Fade>
             </section>
           </span>
