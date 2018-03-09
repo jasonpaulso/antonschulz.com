@@ -77,8 +77,6 @@ class Project extends Component {
 
     const { name, hero, description, images, credits } = this.state.project;
 
-    // const {  } = this.state
-
     return (
       <span className={'project_outer_container'}>
         {name &&

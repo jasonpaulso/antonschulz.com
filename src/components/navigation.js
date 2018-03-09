@@ -11,8 +11,6 @@ class Navigation extends Component {
   }
   componentDidMount() {
 
-    // console.log(window.history.back())
-
     if (
       document.referrer &&
       document.location.href !== document.location.origin + '/' &&

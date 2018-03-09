@@ -4,7 +4,6 @@ import Navigation from './navigation';
 import { Link } from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
 import firebase from '../db/firebase';
-import Hoverable from '../hoverable';
 
 class Home extends Component {
   constructor() {
@@ -20,11 +19,15 @@ class Home extends Component {
 
 
   componentDidMount() {
-    const isTouch = (document.getElementById('document').className === ' non-touch')
-    if (isTouch) {
-      this.setState({
-        isTouch: isTouch
-      })
+    
+    const isNonTouch = (document.getElementById('document').className === ' non-touch')
+    console.log(isNonTouch)
+    if (!isNonTouch) {
+      () => {
+        this.setState({
+          isTouch: !isNonTouch
+        })
+      }
     }
   
     const projectsRef = firebase.database().ref('projects');
@@ -34,6 +37,18 @@ class Home extends Component {
         projects: projects,
       });
     });
+  }
+
+  componentWillMount(){
+    const isNonTouch = (document.getElementById('document').className === ' non-touch')
+    console.log(isNonTouch)
+    if (!isNonTouch) {
+      () => {
+        this.setState({
+          isTouch: !isNonTouch
+        })
+      }
+    }
   }
 
   render() {
