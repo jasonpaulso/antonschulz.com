@@ -18,7 +18,12 @@ class ProjectHero extends Component {
     const { image_url } = this.props;
     return (
       <div className={'project_hero_container'} key={this.state.key}>
-        <img src={`${image_url}`} alt={''} />
+        <a 
+          href={`${image_url}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          ><img src={`${image_url}`} alt={''} />
+        </a>
       </div>
     );
   }

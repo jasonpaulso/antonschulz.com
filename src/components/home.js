@@ -19,10 +19,11 @@ class Home extends Component {
 
 
   componentDidMount() {
-    
+
     const isNonTouch = (document.getElementById('document').className === ' non-touch')
     console.log(isNonTouch)
     if (!isNonTouch) {
+      // eslint-disable-next-line
       () => {
         this.setState({
           isTouch: !isNonTouch
@@ -43,6 +44,7 @@ class Home extends Component {
     const isNonTouch = (document.getElementById('document').className === ' non-touch')
     console.log(isNonTouch)
     if (!isNonTouch) {
+      // eslint-disable-next-line
       () => {
         this.setState({
           isTouch: !isNonTouch
