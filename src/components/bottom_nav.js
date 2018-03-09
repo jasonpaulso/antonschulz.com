@@ -22,7 +22,7 @@ class BottomNav extends Component {
   render = () => {
     return (
       <div id={'bottom_nav'} className={'nav bottom_nav'}>
-        <span className={'copywrite nav_bottom_left'}>&copy 2018</span>
+        <span className={'copywrite nav_bottom_left'}>&copy; 2018</span>
         <ul
           id={'contact_list'}
           className={'contact nav_bottom_right'}
