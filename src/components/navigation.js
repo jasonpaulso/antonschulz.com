@@ -22,6 +22,11 @@ class Navigation extends Component {
     }
   }
 
+  goBack(event) {
+    event.preventDefault()
+    window.history.back()
+  }
+
   render() {
     return (
       <div className={'navigation'}>
@@ -33,7 +38,7 @@ class Navigation extends Component {
           </span>
           <span className={'navigation nav_top_right'}>
             {this.state.backButton ? (
-              <a href={null} onClick={() => window.history.back()}>Back</a>
+              <a href="#back" onClick={this.goBack.bind(this)}>Back</a>
             ) : (
               <Link to={'/about'}>About</Link>
             )}
