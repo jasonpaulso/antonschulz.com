@@ -20,6 +20,8 @@ class App extends Component {
     };
   }
 
+
+
   handleBackgroundRender(image) {
     if (this.state.outerBackgroundIsActive) {
       this.setState(

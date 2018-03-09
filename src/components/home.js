@@ -13,14 +13,25 @@ class Home extends Component {
       page_title: 'Home',
       projects: [],
       clicked: false,
+      isTouch: false
     };
   }
 
+  componentWillUpdate() {
+    const isTouch = !(document.getElementById('document').className === ' non-touch')
+    if (isTouch) {
+      this.setState({
+        isTouch: isTouch
+      })
+    }
+   
+  }
+
   componentDidMount() {
+    console.log(this.state.isTouch)
     const projectsRef = firebase.database().ref('projects');
     projectsRef.on('value', snapshot => {
       let projects = snapshot.val();
-      console.log(projects);
       this.setState({
         projects: projects,
       });
@@ -28,20 +39,18 @@ class Home extends Component {
   }
 
   render() {
-    const { projects, page_title } = this.state;
+    const { projects, page_title, isTouch } = this.state;
     const { onClearBackground, backgroundHandler } = this.props;
 
     const projectRow = (project, index) => {
       return (
         <span key={project.name}>
-        <Hoverable>
           <Link
             to={{ pathname: `/projects/${index}` }}
-            onMouseEnter={() => backgroundHandler(project.hero)}
+            onMouseEnter={isTouch ? null : () => backgroundHandler(project.hero)}
           >
             {project.name}
           </Link>
-          </Hoverable>
         </span>
       );
     };
@@ -54,11 +63,10 @@ class Home extends Component {
             <DocumentTitle title={`Anton Schulz | ${page_title}`} />
             <section>
               <Fade>
-                <Hoverable>
                 <div
                   ref={'project'}
                   className={'projects'}
-                  onMouseLeave={() => onClearBackground()}
+                  onMouseLeave={isTouch ? null : () => onClearBackground()}
                 >
                   <div className="row">
                     {projects.slice(0, 3).map((project, index) => {
@@ -71,7 +79,6 @@ class Home extends Component {
                     })}
                   </div>
                 </div>
-              </Hoverable>
               </Fade>
             </section>
           </span>
