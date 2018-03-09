@@ -6,11 +6,16 @@ import Home from './components/home';
 import Project from './components/single_project';
 import Fade from 'react-reveal/Fade';
 
+import viewportunitsfix from 'viewport-units-buggyfill';
+
+
+
 import { BrowserRouter, Route, withRouter, Switch } from 'react-router-dom';
 
 class App extends Component {
   constructor() {
     super();
+    viewportunitsfix.init()
     this.state = {
       outerBackgroundIsActive: true,
       backgroundOuter: null,
@@ -18,6 +23,15 @@ class App extends Component {
       backgroundContainerVisable: true,
       backGroundIsSet: false,
     };
+  }
+
+  componentDidMount(){
+    const isTouch = !(document.getElementById('document').className === ' non-touch')
+    if (isTouch) {
+      this.setState({
+        isTouch: isTouch
+      })
+    }
   }
 
 
@@ -36,7 +50,7 @@ class App extends Component {
             {
               backgroundInner: null,
             }
-            // () => window.scrollTo(0, 0)
+          
           );
         }
       );
@@ -53,7 +67,6 @@ class App extends Component {
             {
               backgroundOuter: null,
             }
-            // () => window.scrollTo(0, 0)
           );
         }
       );
@@ -61,14 +74,25 @@ class App extends Component {
   }
 
   clearBackground() {
-    this.setState(
-      {
+    if (this.state.isTouch) {
+      this.setState({
+        backgroundInner: null,
+        backgroundOuter: null,    
+      }, () => {
+        this.setState({
+          backGroundIsSet: false,
+          backgroundContainerVisable: false,
+          outerBackgroundIsActive: !this.state.outerBackgroundIsActive,
+        })
+      })
+    } else {
+      this.setState({
         backgroundContainerVisable: false,
         outerBackgroundIsActive: !this.state.outerBackgroundIsActive,
         backGroundIsSet: false,
-      },
-      () => {}
-    );
+      })
+    }
+    
   }
   render() {
     const {

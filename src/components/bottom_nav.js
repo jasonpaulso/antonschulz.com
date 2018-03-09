@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 
 class BottomNav extends Component {
-  openContactMenu() {
+
+  componentDidMount() {
+    window.addEventListener('scroll', (event) => {
+      this.closeContactMenu(event)
+    });
+  }
+  openContactMenu(event) {
+    event.preventDefault()
     document.getElementById('contact_list').classList.add('show');
     document.getElementById('contact_open_link').classList.add('hidden');
   }
-  closeContactMenu() {
+  closeContactMenu(event) {
+    event.preventDefault()
     document.getElementById('contact_list').classList.remove('show');
     document.getElementById('contact_open_link').classList.remove('hidden');
   }
@@ -43,7 +51,7 @@ class BottomNav extends Component {
           </li>
 
           <li>
-            <a href="" id={'contact_open_link'} className={'contact_link'}>
+            <a href="" id={'contact_open_link'} className={'contact_link'} onClick={(event) => this.openContactMenu(event)}>
               Connect
             </a>
           </li>

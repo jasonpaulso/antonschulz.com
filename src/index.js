@@ -17,7 +17,6 @@ registerServiceWorker();
 
 window.onload = () => {
 
-  console.log("working")
   var touchsupport =
     'ontouchstart' in window ||
     navigator.maxTouchPoints > 0 ||
@@ -26,4 +25,7 @@ window.onload = () => {
   if (!touchsupport) {
     document.documentElement.className += ' non-touch';
   }
-};
+
+  
+}
+

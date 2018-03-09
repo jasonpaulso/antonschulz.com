@@ -10,6 +10,9 @@ class Navigation extends Component {
     };
   }
   componentDidMount() {
+
+    // console.log(window.history.back())
+
     if (
       document.referrer &&
       document.location.href !== document.location.origin + '/' &&
@@ -32,7 +35,7 @@ class Navigation extends Component {
           </span>
           <span className={'navigation nav_top_right'}>
             {this.state.backButton ? (
-              <Link to={document.referrer}>Back</Link>
+              <a href={null} onClick={() => window.history.back()}>Back</a>
             ) : (
               <Link to={'/about'}>About</Link>
             )}

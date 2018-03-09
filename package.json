@@ -25,7 +25,8 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
-    "react-transition-group": "1.x"
+    "react-transition-group": "1.x",
+    "viewport-units-buggyfill": "^0.6.2"
   },
   "scripts": {
     "start": "react-scripts start",

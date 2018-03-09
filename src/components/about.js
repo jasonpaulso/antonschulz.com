@@ -20,7 +20,7 @@ class About extends Component {
         <Navigation showBackButton={true} />
         <DocumentTitle title={`Anton Schulz | ${this.state.page_title}`} />
         <div id="background_container" />
-        <div class="about_description">
+        <div className="about_description">
           <p>{this.state.about_description}</p>
         </div>
       </div>

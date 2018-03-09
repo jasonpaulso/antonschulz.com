@@ -26,7 +26,7 @@ class Home extends Component {
         isTouch: isTouch
       })
     }
-    // console.log(this.state.isTouch)
+  
     const projectsRef = firebase.database().ref('projects');
     projectsRef.on('value', snapshot => {
       let projects = snapshot.val();

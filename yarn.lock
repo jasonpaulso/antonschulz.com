@@ -8402,6 +8402,10 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
+viewport-units-buggyfill@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/viewport-units-buggyfill/-/viewport-units-buggyfill-0.6.2.tgz#8b1ee8fb7afd06739460457657a61ba4fa38cbb1"
+
 vinyl-fs@^2.4.3:
   version "2.4.4"
   resolved "https://registry.yarnpkg.com/vinyl-fs/-/vinyl-fs-2.4.4.tgz#be6ff3270cb55dfd7d3063640de81f25d7532239"
