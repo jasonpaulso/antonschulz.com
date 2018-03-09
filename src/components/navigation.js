@@ -10,7 +10,6 @@ class Navigation extends Component {
     };
   }
   componentDidMount() {
-
     if (
       document.referrer &&
       document.location.href !== document.location.origin + '/' &&

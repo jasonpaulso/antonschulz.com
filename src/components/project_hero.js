@@ -1,4 +1,3 @@
-import Fade from 'react-reveal/Fade';
 import React, { Component } from 'react';
 
 class ProjectHero extends Component {
@@ -19,9 +18,7 @@ class ProjectHero extends Component {
     const { image_url } = this.props;
     return (
       <div className={'project_hero_container'} key={this.state.key}>
-        <Fade duration={800} reverse key={this.state.key}>
-          <img src={`${image_url}`} alt={''} key={this.state.key} />
-        </Fade>
+        <img src={`${image_url}`} alt={''} />
       </div>
     );
   }

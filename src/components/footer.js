@@ -52,7 +52,10 @@ class Footer extends Component {
       <footer>
         <div className="footer_top_nav">
           <span className="previous_link">
-            <Link to={{ pathname: `/projects/${this.state.previous}` } } timestamp={new Date().toString()} >
+            <Link
+              to={{ pathname: `/projects/${this.state.previous}` }}
+              timestamp={new Date().toString()}
+            >
               Previous
             </Link>
           </span>
