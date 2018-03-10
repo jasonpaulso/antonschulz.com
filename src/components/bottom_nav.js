@@ -3,31 +3,48 @@ import React, { Component } from 'react';
 class BottomNav extends Component {
   componentDidMount() {
     window.addEventListener('scroll', event => {
-      this.closeContactMenu(event);
+      this.closeHiddenMenu(event);
     });
   }
 
-  openContactMenu = event => {
+  openHiddenMenu = event => {
+    
     event.preventDefault();
-    document.getElementById('contact_list').classList.add('show');
-    document.getElementById('contact_open_link').classList.add('hidden');
+    if (event.target.id === "contact_open_link") {
+      document.getElementById('contact_list').classList.add('show');
+      document.getElementById('contact_open_link').classList.add('hidden');
+    } else if ( event.target.id === 'copywrite') {
+      event.target.classList.add("show");
+    };
+    
+    
+    
   };
 
-  closeContactMenu = event => {
+  closeHiddenMenu = event => {
     event.preventDefault();
     document.getElementById('contact_list').classList.remove('show');
     document.getElementById('contact_open_link').classList.remove('hidden');
+    document.getElementById('copywrite').classList.remove('show');
   };
 
   render = () => {
     return (
       <div id={'bottom_nav'} className={'nav bottom_nav'}>
-        <span className={'copywrite nav_bottom_left'}>&copy; 2018</span>
+        <span 
+          
+          id="copywrite" 
+          className={'copywrite nav_bottom_left'} 
+          onMouseEnter={this.openHiddenMenu.bind(this)} onMouseLeave={this.closeHiddenMenu} >&copy; 2018 
+
+            <span className={"hidden"}>  Built by <a href="http://jasonpaulsouthwell.com" target="_blank" rel="noopener noreferrer">Jason Southwell</a></span>
+
+        </span>
         <ul
           id={'contact_list'}
           className={'contact nav_bottom_right'}
-          onMouseEnter={this.openContactMenu}
-          onMouseLeave={this.closeContactMenu}
+          onMouseEnter={this.openHiddenMenu.bind(this)}
+          onMouseLeave={this.closeHiddenMenu}
         >
           <li className={'hidden'}>
             <a
@@ -56,7 +73,7 @@ class BottomNav extends Component {
               href=""
               id={'contact_open_link'}
               className={'contact_link'}
-              onClick={event => this.openContactMenu(event)}
+              onClick={event => this.openHiddenMenu(event)}
             >
               Connect
             </a>
