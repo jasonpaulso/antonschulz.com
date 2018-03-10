@@ -8,9 +8,9 @@ class BottomNav extends Component {
   }
 
   openHiddenMenu = event => {
-    
+    console.log(event.target)
     event.preventDefault();
-    if (event.target.id === "contact_open_link") {
+    if (event.target.id === 'contact_open_link' || event.target.id === 'contact_open_link_anchor') {
       document.getElementById('contact_list').classList.add('show');
       document.getElementById('contact_open_link').classList.add('hidden');
     } else if ( event.target.id === 'copywrite') {
@@ -44,7 +44,7 @@ class BottomNav extends Component {
           id={'contact_list'}
           className={'contact nav_bottom_right'}
           onMouseEnter={this.openHiddenMenu.bind(this)}
-          onMouseLeave={this.closeHiddenMenu}
+          onMouseLeave={this.closeHiddenMenu.bind(this)}
         >
           <li className={'hidden'}>
             <a
@@ -68,12 +68,13 @@ class BottomNav extends Component {
             <a href="mailto:hello@antonschulz.com">Email</a>
           </li>
 
-          <li>
-            <a
-              href=""
-              id={'contact_open_link'}
+          <li id={'contact_open_link'}
               className={'contact_link'}
               onClick={event => this.openHiddenMenu(event)}
+              >
+            <a
+              href="#none"
+              id={'contact_open_link_anchor'}
             >
               Connect
             </a>
