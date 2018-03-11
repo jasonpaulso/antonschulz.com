@@ -1,14 +1,10 @@
 {
   "name": "anton-schulz-dot-com",
-  "version": "1",
+  "version": "1.0.0",
   "private": true,
-  "engines": {
-    "node": "9.6.1"
-  },
   "dependencies": {
     "can-use-dom": "^0.1.0",
     "classnames": "^2.2.5",
-    "express": "^4.16.2",
     "filereader": "^0.10.3",
     "firebase": "^4.10.1",
     "firebase-react": "^1.0.3",
@@ -33,10 +29,12 @@
     "viewport-units-buggyfill": "^0.6.2"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "heroku-postbuild": "yarn build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
 }
+
+
