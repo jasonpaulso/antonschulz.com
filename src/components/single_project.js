@@ -83,9 +83,9 @@ class Project extends Component {
     let blurbContainer = document.getElementById('project_blurb_container')
     let navTop = document.getElementById('top_nav')
     if (navTop.getBoundingClientRect().bottom >= blurbContainer.getBoundingClientRect().top) {
-      navTop.classList = 'nav top_nav scrolling'
+      navTop.classList.add('scrolling');
     } else {
-      navTop.classList = 'nav top_nav'
+      navTop.classList.remove('scrolling');
     }
   }
 
