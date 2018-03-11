@@ -1,7 +1,10 @@
 {
   "name": "anton-schulz-dot-com",
-  "version": "0.1.0",
+  "version": "1",
   "private": true,
+  "engines": {
+    "node": "9.6.1"
+  },
   "dependencies": {
     "can-use-dom": "^0.1.0",
     "classnames": "^2.2.5",
