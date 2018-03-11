@@ -29,7 +29,7 @@ class Navigation extends Component {
   render = () => {
     return (
       <div className={'navigation'}>
-        <div className={'nav top_nav'}>
+        <div className={'nav top_nav'} id={"top_nav"}>
           <span className={'page_name nav_top_left'}>
             <Link to="/" label="Anton Schulz">
               Anton Schulz

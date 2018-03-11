@@ -25,6 +25,7 @@ class Project extends Component {
   }
 
   componentDidMount = () => {
+    window.addEventListener('scroll', this.handleScroll);
     const projectsRef = firebase.database().ref('projects');
     projectsRef.on('value', snapshot => {
       let projects = snapshot.val();
@@ -57,6 +58,7 @@ class Project extends Component {
   };
 
   componentWillUnmount = () => {
+    window.removeEventListener('scroll', this.handleScroll);
     this.props.onClearBackground();
   };
 
@@ -72,6 +74,20 @@ class Project extends Component {
       );
     }
   };
+
+  isHidden = (el) => {
+    return (el.offsetParent === null)
+  }
+
+  handleScroll = (event) => {
+    let blurbContainer = document.getElementById('project_blurb_container')
+    let navTop = document.getElementById('top_nav')
+    if (navTop.getBoundingClientRect().bottom >= blurbContainer.getBoundingClientRect().top) {
+      navTop.classList = 'nav top_nav scrolling'
+    } else {
+      navTop.classList = 'nav top_nav'
+    }
+  }
 
   render = () => {
     const { id, timestamp } = this.state;
@@ -101,7 +117,7 @@ class Project extends Component {
                             <h1>{name}</h1>
                           </Fade>
                         </div>
-                        <div className={'project_blurb_container'}>
+                        <div className={'project_blurb_container'} id={'project_blurb_container'}>
                           <p>{description}</p>
                         </div>
                         <div className={'project_heroes'}>
