@@ -29,7 +29,7 @@
     "viewport-units-buggyfill": "^0.6.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node index.js",
     "build": "react-scripts build",
     "heroku-postbuild": "cd client && yarn --production=false && yarn run build",
     "test": "react-scripts test --env=jsdom",
