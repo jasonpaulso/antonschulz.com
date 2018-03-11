@@ -129,7 +129,6 @@ class App extends Component {
                 />
               )}
             />
-            <Route path="/projects/add" component={withRouter(ProjectForm)} />
             <Route
               path="/projects/:id"
               render={props => (
