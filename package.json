@@ -35,7 +35,7 @@
   "scripts": {
     "start": "node index.js",
     "build": "react-scripts build",
-    "heroku-postbuild": "cd client && yarn --production=false && yarn run build",
+    "heroku-postbuild": "--production=false && yarn run build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
