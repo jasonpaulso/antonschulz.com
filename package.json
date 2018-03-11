@@ -8,6 +8,7 @@
   "dependencies": {
     "can-use-dom": "^0.1.0",
     "classnames": "^2.2.5",
+    "express": "^4.16.2",
     "filereader": "^0.10.3",
     "firebase": "^4.10.1",
     "firebase-react": "^1.0.3",
