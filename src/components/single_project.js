@@ -29,7 +29,7 @@ class Project extends Component {
     const projectsRef = firebase.database().ref('projects');
     projectsRef.on('value', snapshot => {
       let projects = snapshot.val();
-
+      
       this.setState(
         {
           id: this.props.match.params.id,
@@ -49,6 +49,7 @@ class Project extends Component {
         scrolled: true,
       },
       () => {
+        // console.log(this.state.project.images)
         if (!this.props.backGroundIsSet || navLinkClicked) {
           this.props.backgroundHandler(this.state.project.hero);
         }
@@ -121,7 +122,7 @@ class Project extends Component {
                           <p>{description}</p>
                         </div>
                         <div className={'project_heroes'}>
-                          {images.map(imageUrl => {
+                          {images.sort().map(imageUrl => {
                             if (!imageUrl.includes('_0')) {
                               return (
                                 <Fade key={Math.random()}>

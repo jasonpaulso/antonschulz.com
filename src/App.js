@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import ProjectForm from './components/form';
+// import ProjectForm from './components/form';
 import About from './components/about';
 import Home from './components/home';
 import Project from './components/single_project';
