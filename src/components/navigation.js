@@ -10,16 +10,8 @@ class Navigation extends Component {
     };
   }
   componentDidMount = () => {
-
-    console.log(document.referrer, document.location.href, document.location.origin, this.props.showBackButton)
-
-    if (
-      document.referrer &&
-      document.location.href !== document.location.origin + '/' &&
-      this.props.showBackButton
-
-    ) {
-
+  
+  if (this.props.showBackButton && window.previousLocation) {
       this.setState({
         backButton: true,
       });

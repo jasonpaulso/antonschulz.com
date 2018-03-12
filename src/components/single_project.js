@@ -25,6 +25,7 @@ class Project extends Component {
   }
 
   componentDidMount = () => {
+    window.previousLocation = this.props.location
     window.addEventListener('scroll', this.handleScroll);
     const projectsRef = firebase.database().ref('projects');
     projectsRef.on('value', snapshot => {
