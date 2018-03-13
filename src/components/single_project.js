@@ -12,13 +12,7 @@ class Project extends Component {
     super();
     this.state = {
       projects: [],
-      project: {
-        name: '',
-        description: '',
-        hero: '',
-        images: [],
-        credits: [],
-      },
+      project: {},
     };
   }
   componentDidMount = () => {
@@ -93,29 +87,28 @@ class Project extends Component {
   };
 
   render = () => {
-    const { project } = this.state;
 
-    const { name, description, images, credits } = project;
+    const { project } = this.state;
 
     return (
       <span>
         {project &&
-          images && (
+          project.images && (
             <span className={'project_outer_container'}>
               <span>
-                <DocumentTitle title={`Anton Schulz | ${name}`} />
+                <DocumentTitle title={`Anton Schulz | ${project.name}`} />
                 <Navigation backButton={false} />
                 <div className={'project_outer_container'}>
                   <section className={'project_container'}>
                     <div className={'project_title_container'}>
                       <Fade>
-                        <h1>{name}</h1>
+                        <h1>{project.name}</h1>
                       </Fade>
                     </div>
-                    <ProjectDescriptionModule description={description} />
-                    <ProjectGalleryModule images={images} />
-                    {credits &&
-                      credits.length && <CreditsModule credits={credits} />}
+                    <ProjectDescriptionModule description={project.description} />
+                    <ProjectGalleryModule images={project.images} />
+                    {project.credits &&
+                      project.credits.length && <CreditsModule credits={project.credits} />}
                     <TrackVisibility offset={50}>
                       <Footer
                         currentPage={this.props.match.params.id}
