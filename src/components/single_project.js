@@ -7,6 +7,7 @@ import Fade from 'react-reveal/Fade';
 import TrackVisibility from 'react-on-screen';
 import firebase from '../db/firebase';
 import ProgressiveImage from 'react-progressive-image';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
 
 class Project extends Component {
   constructor() {
@@ -144,6 +145,7 @@ const ProjectGalleryModule = props => {
   const { images } = props;
   return (
     <div className={'project_heroes'}>
+
       {images.sort().map((imageUrl, index) => {
         if (!imageUrl.includes('_0')) {
           return (
@@ -165,13 +167,14 @@ const ProjectGalleryImage = props => {
   return (
    
     <div className={'project_hero_container'}>
-          <ProgressiveImage src={image_url} placeholder={image_url}>
+    <Fade delay={100}>
+          <ProgressiveImage src={image_url} placeholder={null}>
         {(src, loading) => (
-          <Fade>
-            <img style={{ opacity: loading ? 0 : 1 }} src={src} alt={src}/>
-          </Fade>
+          
+            <img style={{ opacity: loading ? 0 : 1, width:'100%' }} src={src} alt={src}/>
         )}
       </ProgressiveImage>
+      </Fade>
     </div>
   
   );

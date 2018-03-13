@@ -34,7 +34,7 @@
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
-    "react-transition-group": "1.x",
+    "react-transition-group": "^2.2.1",
     "react-visibility-sensor": "^3.11.0",
     "styled-components": "^3.2.1",
     "viewport-units-buggyfill": "^0.6.2"
