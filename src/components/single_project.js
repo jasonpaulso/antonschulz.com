@@ -53,6 +53,9 @@ class Project extends Component {
   };
 
   loadIndividualProject = (projectId, navLinkClicked) => {
+
+    const project = this.state.projects.filter (project => "Thync" === project.name)
+    console.log(project)
     this.setState(
       {
         project: this.state.projects[this.state.id],
@@ -81,7 +84,7 @@ class Project extends Component {
     let projectContainer = document.getElementById('project_blurb_container');
     let documentTop = document.body.scrollTop - 300;
     let backgroundContainer = document.getElementById('background_container');
-    if (
+    if (projectContainer && documentTop && backgroundContainer&&
       documentTop >= projectContainer.getBoundingClientRect().bottom
     ) {
       backgroundContainer.classList.add('hidden');
@@ -167,14 +170,15 @@ const ProjectGalleryImage = props => {
   return (
    
     <div className={'project_hero_container'}>
-    <Fade delay={100}>
+    
           <ProgressiveImage src={image_url} placeholder={null}>
         {(src, loading) => (
-          
+            <Fade delay={300} duration={3000} key={image_url}>
             <img style={{ opacity: loading ? 0 : 1, width:'100%' }} src={src} alt={src}/>
+            </Fade>
         )}
       </ProgressiveImage>
-      </Fade>
+      
     </div>
   
   );
