@@ -8,17 +8,16 @@ class BottomNav extends Component {
   }
 
   openHiddenMenu = event => {
-    console.log(event.target)
     event.preventDefault();
-    if (event.target.id === 'contact_open_link' || event.target.id === 'contact_open_link_anchor') {
+    if (
+      event.target.id === 'contact_open_link' ||
+      event.target.id === 'contact_open_link_anchor'
+    ) {
       document.getElementById('contact_list').classList.add('show');
       document.getElementById('contact_open_link').classList.add('hidden');
-    } else if ( event.target.id === 'copywrite') {
-      event.target.classList.add("show");
-    };
-    
-    
-    
+    } else if (event.target.id === 'copywrite') {
+      event.target.classList.add('show');
+    }
   };
 
   closeHiddenMenu = event => {
@@ -31,14 +30,24 @@ class BottomNav extends Component {
   render = () => {
     return (
       <div id={'bottom_nav'} className={'nav bottom_nav'}>
-        <span 
-          
-          id="copywrite" 
-          className={'copywrite nav_bottom_left'} 
-          onMouseEnter={this.openHiddenMenu.bind(this)} onMouseLeave={this.closeHiddenMenu} >&copy; 2018 
-
-            <span className={"hidden"}>  Built by <a href="http://jasonpaulsouthwell.com" target="_blank" rel="noopener noreferrer">Jason Southwell</a></span>
-
+        <span
+          id="copywrite"
+          className={'copywrite nav_bottom_left'}
+          onMouseEnter={this.openHiddenMenu.bind(this)}
+          onMouseLeave={this.closeHiddenMenu}
+        >
+          &copy; 2018
+          <span className={'hidden'}>
+            {' '}
+            Anton Schulz - Built by{' '}
+            <a
+              href="http://jasonpaulsouthwell.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Jason Southwell
+            </a>
+          </span>
         </span>
         <ul
           id={'contact_list'}
@@ -68,14 +77,12 @@ class BottomNav extends Component {
             <a href="mailto:hello@antonschulz.com">Email</a>
           </li>
 
-          <li id={'contact_open_link'}
-              className={'contact_link'}
-              onClick={event => this.openHiddenMenu(event)}
-              >
-            <a
-              href="#none"
-              id={'contact_open_link_anchor'}
-            >
+          <li
+            id={'contact_open_link'}
+            className={'contact_link'}
+            onClick={event => this.openHiddenMenu(event)}
+          >
+            <a href="#none" id={'contact_open_link_anchor'}>
               Connect
             </a>
           </li>

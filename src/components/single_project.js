@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import Footer from './footer';
 import Navigation from './navigation';
-import ProjectHero from './project_hero';
 import {} from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
 import TrackVisibility from 'react-on-screen';
@@ -12,7 +11,6 @@ class Project extends Component {
   constructor() {
     super();
     this.state = {
-      timestamp: 'Thu Mar 08 2018 15:06:23 GMT-0800 (PST)',
       projects: [],
       project: {
         name: '',
@@ -23,34 +21,47 @@ class Project extends Component {
       },
     };
   }
-
   componentDidMount = () => {
-    window.previousLocation = this.props.location
-    window.addEventListener('scroll', this.handleScroll);
+    this.setGlobals();
+    this.fetchProjects(this.loadIndividualProject);
+  };
+  componentWillUnmount = () => {
+    window.removeEventListener('scroll', this.handleScroll);
+    this.props.onClearBackground();
+  };
+  componentDidUpdate = prevProps => {
+    if (this.props.location !== prevProps.location) {
+      this.updateIndividualProject(this.loadIndividualProject);
+    }
+  };
+
+  fetchProjects = closure => {
     const projectsRef = firebase.database().ref('projects');
     projectsRef.on('value', snapshot => {
       let projects = snapshot.val();
-      
       this.setState(
         {
           id: this.props.match.params.id,
           projects: projects,
         },
         () => {
-          this.loadProject(this.props.match.params.id);
+          closure(this.props.match.params.id);
         }
       );
     });
   };
 
-  loadProject = (projectId, navLinkClicked) => {
+  setGlobals = () => {
+    window.previousLocation = this.props.location;
+    window.addEventListener('scroll', this.handleScroll);
+  };
+
+  loadIndividualProject = (projectId, navLinkClicked) => {
     this.setState(
       {
         project: this.state.projects[this.state.id],
-        scrolled: true,
       },
       () => {
-        // console.log(this.state.project.images)
         if (!this.props.backGroundIsSet || navLinkClicked) {
           this.props.backgroundHandler(this.state.project.hero);
         }
@@ -58,107 +69,62 @@ class Project extends Component {
       }
     );
   };
-
-  componentWillUnmount = () => {
-    window.removeEventListener('scroll', this.handleScroll);
-    this.props.onClearBackground();
-  };
-
-  componentDidUpdate = prevProps => {
-    if (this.props.location !== prevProps.location) {
-      this.setState(
-        {
-          id: this.props.match.params.id,
-        },
-        () => {
-          this.loadProject(this.state.id, true);
-        }
-      );
-    }
-  };
-
-  isHidden = (el) => {
-    return (el.offsetParent === null)
-  }
-
-  handleScroll = (event) => {
-    let blurbContainer = document.getElementById('project_blurb_container')
-    let navTop = document.getElementById('top_nav')
-    if (navTop.getBoundingClientRect().bottom >= blurbContainer.getBoundingClientRect().top) {
+  handleScroll = event => {
+    let blurbContainer = document.getElementById('project_blurb_container');
+    let navTop = document.getElementById('top_nav');
+    if (
+      navTop.getBoundingClientRect().bottom >=
+      blurbContainer.getBoundingClientRect().top
+    ) {
       navTop.classList.add('scrolling');
     } else {
       navTop.classList.remove('scrolling');
     }
-  }
+  };
+  updateIndividualProject = closure => {
+    this.setState(
+      {
+        id: this.props.match.params.id,
+      },
+      () => {
+        closure(this.state.id, true);
+      }
+    );
+  };
 
   render = () => {
-    const { id, timestamp } = this.state;
+    const { project } = this.state;
 
-    const { name, hero, description, images, credits } = this.state.project;
+    const { name, description, images, credits } = project;
 
     return (
-      <span className={'project_outer_container'}>
-        {name &&
-          hero &&
-          description &&
-          images &&
-          timestamp &&
-          id && (
-            <span>
-              <DocumentTitle title={`Anton Schulz | ${name}`} />
-              <Navigation backButton={false} />
-              <div className={'project_outer_container'}>
-                <section className={'project_container'}>
-                  {name &&
-                    hero &&
-                    description &&
-                    images && (
-                      <span>
-                        <div className={'project_title_container'}>
-                          <Fade>
-                            <h1>{name}</h1>
-                          </Fade>
-                        </div>
-                        <div className={'project_blurb_container'} id={'project_blurb_container'}>
-                          <p>{description}</p>
-                        </div>
-                        <div className={'project_heroes'}>
-                          {images.sort().map(imageUrl => {
-                            if (!imageUrl.includes('_0')) {
-                              return (
-                                <Fade key={Math.random()}>
-                                  <ProjectHero image_url={imageUrl} />
-                                </Fade>
-                              );
-                            } else {
-                              return null;
-                            }
-                          })}
-                        </div>
-                        {credits &&
-                          credits.length > 0 && (
-                            <div className={'project_credits_container'}>
-                              {credits.map(credit => {
-                                return (
-                                  <p key={credit.title}>
-                                    {credit.title}: {credit.name}
-                                  </p>
-                                );
-                              })}
-                            </div>
-                          )}
-                        <TrackVisibility offset={50}>
-                          <Footer
-                            currentPage={this.props.match.params.id}
-                            pages={this.state.projects.length}
-                            next={parseInt(this.props.match.params.id, 10) + 1}
-                            previous={this.props.match.params.id - 1}
-                          />
-                        </TrackVisibility>
-                      </span>
-                    )}
-                </section>
-              </div>
+      <span>
+        {project &&
+          images && (
+            <span className={'project_outer_container'}>
+              <span>
+                <DocumentTitle title={`Anton Schulz | ${name}`} />
+                <Navigation backButton={false} />
+                <div className={'project_outer_container'}>
+                  <section className={'project_container'}>
+                    <div className={'project_title_container'}>
+                      <Fade>
+                        <h1>{name}</h1>
+                      </Fade>
+                    </div>
+                    <ProjectDescriptionModule description={description} />
+                    <ProjectGalleryModule images={images} />
+                    {credits &&
+                      credits.length && <CreditsModule credits={credits} />}
+                    <TrackVisibility offset={50}>
+                      <Footer
+                        currentPage={this.props.match.params.id}
+                        pages={this.state.projects.length}
+                      />
+                    </TrackVisibility>
+                  </section>
+                </div>
+              </span>
             </span>
           )}
       </span>
@@ -167,3 +133,57 @@ class Project extends Component {
 }
 
 export default Project;
+
+const ProjectGalleryModule = props => {
+  const { images } = props;
+  return (
+    <div className={'project_heroes'}>
+      {images.sort().map(imageUrl => {
+        if (!imageUrl.includes('_0')) {
+          return (
+            <Fade key={Math.random()}>
+              <ProjectHero image_url={imageUrl} />
+            </Fade>
+          );
+        } else {
+          return null;
+        }
+      })}
+    </div>
+  );
+};
+
+const ProjectHero = props => {
+  const { image_url } = props;
+  return (
+    <div className={'project_hero_container'} key={image_url}>
+      <a href={`${image_url}`} target="_blank" rel="noopener noreferrer">
+        <img src={`${image_url}`} alt={''} />
+      </a>
+    </div>
+  );
+};
+
+const CreditsModule = props => {
+  const { credits } = props;
+  return (
+    <div className={'project_credits_container'}>
+      {credits.map(credit => {
+        return (
+          <p key={credit.title}>
+            {credit.title}: {credit.name}
+          </p>
+        );
+      })}
+    </div>
+  );
+};
+
+const ProjectDescriptionModule = props => {
+  const { description } = props;
+  return (
+    <div className={'project_blurb_container'} id={'project_blurb_container'}>
+      <p>{description}</p>
+    </div>
+  );
+};

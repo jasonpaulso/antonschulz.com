@@ -17,7 +17,7 @@ class Home extends Component {
   }
 
   componentDidMount = () => {
-    window.previousLocation = this.props.location
+    window.previousLocation = this.props.location;
     const isNonTouch =
       document.getElementById('document').className === ' non-touch';
     console.log(isNonTouch);
