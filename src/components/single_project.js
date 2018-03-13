@@ -7,8 +7,7 @@ import Fade from 'react-reveal/Fade';
 import TrackVisibility from 'react-on-screen';
 import firebase from '../db/firebase';
 import ProgressiveImage from 'react-progressive-image';
-import TransitionGroup from 'react-transition-group/TransitionGroup';
-import { BrowserRouter, Route, withRouter, Switch, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 class Project extends Component {
   constructor() {
@@ -70,13 +69,18 @@ class Project extends Component {
             this.props.backgroundHandler(this.state.project.hero);
           }
           window.scrollTo(0, 0);
-          document.documentElement.style.overflow = 'auto'
+          document.documentElement.style.overflow = 'auto';
         }
         
       }
     );
   };
   handleScroll = event => {
+    this.handleBackgroundHide()
+    this.handleMobileNavColorChangeOnScroll()
+  };
+
+  handleMobileNavColorChangeOnScroll = () => {
     let descriptionContainer = document.getElementById('project_blurb_container');
     let navTop = document.getElementById('top_nav');
     if ( navTop && descriptionContainer &&
@@ -87,7 +91,9 @@ class Project extends Component {
     } else {
       navTop.classList.remove('scrolling');
     }
+  };
 
+  handleBackgroundHide = () => {
     let projectContainer = document.getElementById('project_blurb_container');
     let documentTop = document.body.scrollTop - 300;
     let backgroundContainer = document.getElementById('background_container');
@@ -99,6 +105,7 @@ class Project extends Component {
       backgroundContainer.classList.remove('hidden');
     }
   };
+
   updateIndividualProject = closure => {
     this.setState(
       {
@@ -123,35 +130,23 @@ class Project extends Component {
         {project &&
           project.images && (
             <span className={'project_outer_container'}>
-              <span>
                 <DocumentTitle title={`Anton Schulz | ${project.name}`} />
                 <Navigation backButton={false} />
                 <div className={'project_inner_container'} >
                   <section className={'project_container'}>
-                    <div className={'project_title_container'}>
-                      <Fade>
-                        <h1>{project.name}</h1>
-                      </Fade>
-                    </div>
+                    <div className={'project_title_container'}><Fade><h1>{project.name}</h1></Fade></div>
                     <ProjectDescriptionModule description={project.description} />
                     <ProjectGalleryModule images={project.images} />
-                    {project.credits &&
-                      project.credits.length && <CreditsModule credits={project.credits} />}
-                    <TrackVisibility offset={50}>
-                      <Footer
-                        currentPage={this.props.match.params.id}
-                        pages={this.state.projects.length}
-                      />
-                    </TrackVisibility>
+                    {project.credits && project.credits.length && <CreditsModule credits={project.credits} /> }
+                    <TrackVisibility offset={50}><Footer currentPage={this.props.match.params.id} pages={this.state.projects.length} /></TrackVisibility>
                   </section>
                 </div>
-              </span>
             </span>
           )}
       </span>
     );
   };
-}
+};
 
 export default Project;
 
@@ -159,15 +154,11 @@ const ProjectGalleryModule = props => {
   const { images } = props;
   return (
     <div className={'project_heroes'}>
-
       {images.sort().map((imageUrl, index) => {
         if (!imageUrl.includes('_0')) {
           return (
-            
-              <ProjectGalleryImage image_url={imageUrl} key={imageUrl}/>
-            
+             <ProjectGalleryImage image_url={imageUrl} key={imageUrl}/>
           );
-
         } else {
           return null;
         }
@@ -179,19 +170,15 @@ const ProjectGalleryModule = props => {
 const ProjectGalleryImage = props => {
   const { image_url } = props;
   return (
-   
     <div className={'project_hero_container'}>
-    
           <ProgressiveImage src={image_url} placeholder={null}>
         {(src, loading) => (
-            <Fade delay={300} duration={1000} key={image_url}>
+            <Fade delay={0} duration={1000} key={image_url}>
             <img style={{ opacity: loading ? 0 : 1, width:'100%' }} src={src} alt={src}/>
             </Fade>
         )}
-      </ProgressiveImage>
-      
+      </ProgressiveImage>   
     </div>
-  
   );
 };
 
