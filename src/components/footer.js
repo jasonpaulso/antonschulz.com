@@ -14,7 +14,7 @@ class Footer extends Component {
     this.loadFooter();
   };
 
-  handleVisibilityChange = isVisible => {
+  handleVisibilityChange = (isVisible) => {
     const bottomNav = document.getElementById('bottom_nav');
     if (isVisible) {
       bottomNav.classList.add('footer_view');
@@ -23,7 +23,7 @@ class Footer extends Component {
     }
   };
 
-  componentWillReceiveProps = nextProps => {
+  componentWillReceiveProps = (nextProps) => {
     if (nextProps.isVisible) {
       this.handleVisibilityChange(nextProps.isVisible);
     } else {

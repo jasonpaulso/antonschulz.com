@@ -5,9 +5,7 @@ import About from './components/about';
 import Home from './components/home';
 import Project from './components/single_project';
 import Fade from 'react-reveal/Fade';
-
 import viewportunitsfix from 'viewport-units-buggyfill';
-
 import { BrowserRouter, Route, withRouter, Switch } from 'react-router-dom';
 
 class App extends Component {
@@ -102,15 +100,15 @@ class App extends Component {
       <BrowserRouter>
         <span>
           <Fade opposite when={backgroundContainerVisable}>
-            <span className={`background_container`}>
+            <span className={`background_container`} id={'background_container'}>
               <Fade opposite when={!outerBackgroundIsActive}>
-                <div
+                <img
                   id="background_outer"
                   style={{ backgroundImage: `url(${backgroundOuter})` }}
                 />
               </Fade>
               <Fade opposite when={outerBackgroundIsActive}>
-                <div
+                <img
                   id="background_inner"
                   style={{ backgroundImage: `url(${backgroundInner})` }}
                 />

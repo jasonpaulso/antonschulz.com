@@ -22,9 +22,17 @@ class BottomNav extends Component {
 
   closeHiddenMenu = event => {
     event.preventDefault();
-    document.getElementById('contact_list').classList.remove('show');
-    document.getElementById('contact_open_link').classList.remove('hidden');
-    document.getElementById('copywrite').classList.remove('show');
+    const contactList = document.getElementById('contact_list');
+    const contactLink = document.getElementById('contact_open_link');
+    const copywrite = document.getElementById('copywrite');
+    if (contactList && contactLink && copywrite) {
+      contactList.classList.remove('show');
+      contactLink.classList.remove('hidden');
+      copywrite.classList.remove('show');
+    }
+    // document.getElementById('contact_list').classList.remove('show');
+    // document.getElementById('contact_open_link').classList.remove('hidden');
+    // document.getElementById('copywrite').classList.remove('show');
   };
 
   render = () => {

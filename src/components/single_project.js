@@ -6,6 +6,7 @@ import {} from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
 import TrackVisibility from 'react-on-screen';
 import firebase from '../db/firebase';
+import ProgressiveImage from 'react-progressive-image';
 
 class Project extends Component {
   constructor() {
@@ -60,19 +61,31 @@ class Project extends Component {
           this.props.backgroundHandler(this.state.project.hero);
         }
         window.scrollTo(0, 0);
+        document.documentElement.style.overflow = 'auto'
       }
     );
   };
   handleScroll = event => {
-    let blurbContainer = document.getElementById('project_blurb_container');
+    let descriptionContainer = document.getElementById('project_blurb_container');
     let navTop = document.getElementById('top_nav');
-    if (
+    if ( navTop && descriptionContainer &&
       navTop.getBoundingClientRect().bottom >=
-      blurbContainer.getBoundingClientRect().top
+      descriptionContainer.getBoundingClientRect().top
     ) {
       navTop.classList.add('scrolling');
     } else {
       navTop.classList.remove('scrolling');
+    }
+
+    let projectContainer = document.getElementById('project_blurb_container');
+    let documentTop = document.body.scrollTop - 300;
+    let backgroundContainer = document.getElementById('background_container');
+    if (
+      documentTop >= projectContainer.getBoundingClientRect().bottom
+    ) {
+      backgroundContainer.classList.add('hidden');
+    } else {
+      backgroundContainer.classList.remove('hidden');
     }
   };
   updateIndividualProject = closure => {
@@ -98,7 +111,7 @@ class Project extends Component {
               <span>
                 <DocumentTitle title={`Anton Schulz | ${project.name}`} />
                 <Navigation backButton={false} />
-                <div className={'project_outer_container'}>
+                <div className={'project_inner_container'} >
                   <section className={'project_container'}>
                     <div className={'project_title_container'}>
                       <Fade>
@@ -131,13 +144,14 @@ const ProjectGalleryModule = props => {
   const { images } = props;
   return (
     <div className={'project_heroes'}>
-      {images.sort().map(imageUrl => {
+      {images.sort().map((imageUrl, index) => {
         if (!imageUrl.includes('_0')) {
           return (
-            <Fade key={Math.random()}>
-              <ProjectHero image_url={imageUrl} />
-            </Fade>
+            
+              <ProjectGalleryImage image_url={imageUrl} key={imageUrl}/>
+            
           );
+
         } else {
           return null;
         }
@@ -146,14 +160,20 @@ const ProjectGalleryModule = props => {
   );
 };
 
-const ProjectHero = props => {
+const ProjectGalleryImage = props => {
   const { image_url } = props;
   return (
-    <div className={'project_hero_container'} key={image_url}>
-      <a href={`${image_url}`} target="_blank" rel="noopener noreferrer">
-        <img src={`${image_url}`} alt={''} />
-      </a>
+   
+    <div className={'project_hero_container'}>
+          <ProgressiveImage src={image_url} placeholder={image_url}>
+        {(src, loading) => (
+          <Fade>
+            <img style={{ opacity: loading ? 0 : 1 }} src={src} alt={src}/>
+          </Fade>
+        )}
+      </ProgressiveImage>
     </div>
+  
   );
 };
 
@@ -180,3 +200,5 @@ const ProjectDescriptionModule = props => {
     </div>
   );
 };
+
+
