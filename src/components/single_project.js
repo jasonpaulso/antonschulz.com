@@ -128,7 +128,7 @@ class Project extends Component {
     return (
       <span>
         {project &&
-          project.images && (
+          project.images && project.description && project.name &&(
             <span className={'project_outer_container'}>
                 <DocumentTitle title={`Anton Schulz | ${project.name}`} />
                 <Navigation backButton={false} />
