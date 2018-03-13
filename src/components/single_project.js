@@ -8,6 +8,7 @@ import TrackVisibility from 'react-on-screen';
 import firebase from '../db/firebase';
 import ProgressiveImage from 'react-progressive-image';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
+import { BrowserRouter, Route, withRouter, Switch, Redirect } from 'react-router-dom';
 
 class Project extends Component {
   constructor() {
@@ -53,19 +54,25 @@ class Project extends Component {
   };
 
   loadIndividualProject = (projectId, navLinkClicked) => {
-
-    const project = this.state.projects.filter (project => "Thync" === project.name)
-    console.log(project)
     this.setState(
       {
         project: this.state.projects[this.state.id],
       },
       () => {
-        if (!this.props.backGroundIsSet || navLinkClicked) {
-          this.props.backgroundHandler(this.state.project.hero);
+        if (!this.state.project) {
+          this.setState({
+            navigate: true
+          }, () => {
+            return
+          })
+        } else {
+          if (!this.props.backGroundIsSet || navLinkClicked) {
+            this.props.backgroundHandler(this.state.project.hero);
+          }
+          window.scrollTo(0, 0);
+          document.documentElement.style.overflow = 'auto'
         }
-        window.scrollTo(0, 0);
-        document.documentElement.style.overflow = 'auto'
+        
       }
     );
   };
@@ -105,7 +112,11 @@ class Project extends Component {
 
   render = () => {
 
-    const { project } = this.state;
+    const { project, navigate } = this.state;
+
+    if (navigate) {
+      return <Redirect to="/" push={true} />
+    }
 
     return (
       <span>
@@ -173,7 +184,7 @@ const ProjectGalleryImage = props => {
     
           <ProgressiveImage src={image_url} placeholder={null}>
         {(src, loading) => (
-            <Fade delay={300} duration={3000} key={image_url}>
+            <Fade delay={300} duration={1000} key={image_url}>
             <img style={{ opacity: loading ? 0 : 1, width:'100%' }} src={src} alt={src}/>
             </Fade>
         )}
