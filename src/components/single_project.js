@@ -77,7 +77,7 @@ class Project extends Component {
   };
 
   handleScroll = event => {
-    this.handleBackgroundHide()
+    // this.handleBackgroundHide()
     this.handleMobileNavColorChangeOnScroll()
   };
 
