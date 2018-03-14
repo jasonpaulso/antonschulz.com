@@ -6,8 +6,8 @@ import {} from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
 import TrackVisibility from 'react-on-screen';
 import firebase from '../db/firebase';
-import ProgressiveImage from 'react-progressive-image';
 import { Redirect } from 'react-router-dom';
+import { ProjectGalleryModule, ProjectDescriptionModule, ProjectCreditsModule } from './elements/project_modules';
 
 class Project extends Component {
   constructor() {
@@ -60,7 +60,7 @@ class Project extends Component {
       () => {
         if (!this.state.project) {
           this.setState({
-            navigate: true
+            navigateFallback: true
           }, () => {
             return
           })
@@ -75,6 +75,7 @@ class Project extends Component {
       }
     );
   };
+
   handleScroll = event => {
     this.handleBackgroundHide()
     this.handleMobileNavColorChangeOnScroll()
@@ -84,8 +85,7 @@ class Project extends Component {
     let descriptionContainer = document.getElementById('project_blurb_container');
     let navTop = document.getElementById('top_nav');
     if ( navTop && descriptionContainer &&
-      navTop.getBoundingClientRect().bottom >=
-      descriptionContainer.getBoundingClientRect().top
+      navTop.getBoundingClientRect().bottom >= descriptionContainer.getBoundingClientRect().top
     ) {
       navTop.classList.add('scrolling');
     } else {
@@ -107,24 +107,14 @@ class Project extends Component {
   };
 
   updateIndividualProject = closure => {
-    this.setState(
-      {
-        id: this.props.match.params.id,
-      },
-      () => {
-        closure(this.state.id, true);
-      }
-    );
+    this.setState({id: this.props.match.params.id,},() => {closure(this.state.id, true); });
   };
 
   render = () => {
-
-    const { project, navigate } = this.state;
-
-    if (navigate) {
+    const { project, navigateFallback } = this.state;
+    if (navigateFallback) {
       return <Redirect to="/" push={true} />
     }
-
     return (
       <span>
         {project &&
@@ -135,9 +125,9 @@ class Project extends Component {
                 <div className={'project_inner_container'} >
                   <section className={'project_container'}>
                     <div className={'project_title_container'}><Fade><h1>{project.name}</h1></Fade></div>
-                    <ProjectDescriptionModule description={project.description} />
-                    <ProjectGalleryModule images={project.images} />
-                    {project.credits && project.credits.length && <CreditsModule credits={project.credits} /> }
+                    <ProjectDescriptionModule description={project.description} className={'project_blurb_container'} id={'project_blurb_container'}/>
+                    <ProjectGalleryModule images={project.images} className={'project_heroes'} imageClassName={'project_hero_container'}/>
+                    {project.credits && project.credits.length && <ProjectCreditsModule credits={project.credits} className={'project_credits_container'}/> }
                     <TrackVisibility offset={50}><Footer currentPage={this.props.match.params.id} pages={this.state.projects.length} /></TrackVisibility>
                   </section>
                 </div>
@@ -150,60 +140,5 @@ class Project extends Component {
 
 export default Project;
 
-const ProjectGalleryModule = props => {
-  const { images } = props;
-  return (
-    <div className={'project_heroes'}>
-      {images.sort().map((imageUrl, index) => {
-        if (!imageUrl.includes('_0')) {
-          return (
-             <ProjectGalleryImage image_url={imageUrl} key={imageUrl}/>
-          );
-        } else {
-          return null;
-        }
-      })}
-    </div>
-  );
-};
-
-const ProjectGalleryImage = props => {
-  const { image_url } = props;
-  return (
-    <div className={'project_hero_container'}>
-          <ProgressiveImage src={image_url} placeholder={null}>
-        {(src, loading) => (
-            <Fade delay={0} duration={1000} key={image_url}>
-            <img style={{ opacity: loading ? 0 : 1, width:'100%' }} src={src} alt={src}/>
-            </Fade>
-        )}
-      </ProgressiveImage>   
-    </div>
-  );
-};
-
-const CreditsModule = props => {
-  const { credits } = props;
-  return (
-    <div className={'project_credits_container'}>
-      {credits.map(credit => {
-        return (
-          <p key={credit.title}>
-            {credit.title}: {credit.name}
-          </p>
-        );
-      })}
-    </div>
-  );
-};
-
-const ProjectDescriptionModule = props => {
-  const { description } = props;
-  return (
-    <div className={'project_blurb_container'} id={'project_blurb_container'}>
-      <p>{description}</p>
-    </div>
-  );
-};
 
 

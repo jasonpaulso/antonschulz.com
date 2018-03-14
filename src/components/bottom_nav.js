@@ -30,9 +30,6 @@ class BottomNav extends Component {
       contactLink.classList.remove('hidden');
       copywrite.classList.remove('show');
     }
-    // document.getElementById('contact_list').classList.remove('show');
-    // document.getElementById('contact_open_link').classList.remove('hidden');
-    // document.getElementById('copywrite').classList.remove('show');
   };
 
   render = () => {
