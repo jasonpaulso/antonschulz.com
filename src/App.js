@@ -3,9 +3,10 @@ import './App.css';
 import About from './components/about';
 import Home from './components/home';
 import Project from './components/single_project';
-import Fade from 'react-reveal/Fade';
+// import Fade from 'react-reveal/Fade';
 import projectJSON from './db/project_db.json';
 import viewportunitsfix from 'viewport-units-buggyfill';
+import FadeIn from 'react-fade-in';
 
 import { BrowserRouter, Route, withRouter, Switch } from 'react-router-dom';
 
@@ -100,22 +101,22 @@ class App extends Component {
     return (
       <BrowserRouter>
         <span>
-          <Fade opposite when={backgroundContainerVisable}>
+          <span opposite when={backgroundContainerVisable} className={backgroundContainerVisable? 'fadeIn':'fadeOut'}>
             <span className={`background_container`} id={'background_container'}>
-              <Fade opposite when={!outerBackgroundIsActive}>
+              <span opposite when={!outerBackgroundIsActive} className={!outerBackgroundIsActive? 'fadeIn':'fadeOut'}>
                 <div
                   id="background_outer"
                   style={{ backgroundImage: `url(${backgroundOuter})` }}
                 />
-              </Fade>
-              <Fade opposite when={outerBackgroundIsActive}>
+              </span>
+              <span opposite when={outerBackgroundIsActive} className={outerBackgroundIsActive? 'fadeIn':'fadeOut'}>
                 <div
                   id="background_inner"
                   style={{ backgroundImage: `url(${backgroundInner})` }}
                 />
-              </Fade>
+              </span>
             </span>
-          </Fade>
+          </span>
           <Switch>
             <Route
               exact

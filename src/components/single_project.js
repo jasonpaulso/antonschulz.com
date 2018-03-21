@@ -9,6 +9,7 @@ import TrackVisibility from 'react-on-screen';
 import { Redirect } from 'react-router-dom';
 import { ProjectGalleryModule, ProjectDescriptionModule, ProjectCreditsModule } from './elements/project_modules';
 
+
 class Project extends Component {
   constructor() {
     super();
@@ -123,7 +124,7 @@ class Project extends Component {
 
 
   handleScroll = event => {
-    this.handleBackgroundHide()
+    // this.handleBackgroundHide()
     this.handleMobileNavColorChangeOnScroll()
   };
 
@@ -158,20 +159,21 @@ class Project extends Component {
 
   render = () => {
     const { project, navigateFallback, project_images } = this.state;
+    const { description } = this.state.project
     if (navigateFallback) {
       return <Redirect to="/" push={true} />
     }
     return (
       <span>
         {project &&
-          project_images && project.description && project.name &&(
+          project_images && description && project.name &&(
             <span className={'project_outer_container'}>
                 <DocumentTitle title={`Anton Schulz | ${project.name}`} />
                 <Navigation backButton={false} />
                 <div className={'project_inner_container'} >
                   <section className={'project_container'}>
                     <div className={'project_title_container'}><Fade><h1>{project.name}</h1></Fade></div>
-                    <ProjectDescriptionModule description={project.description} className={'project_blurb_container'} id={'project_blurb_container'}/>
+                    <ProjectDescriptionModule description={description} className={'project_blurb_container'} id={'project_blurb_container'}/>
                     <ProjectGalleryModule images={project_images} className={'project_heroes'} imageClassName={'project_hero_container'}/>
                     {project.credits && project.credits.length && <ProjectCreditsModule credits={project.credits} className={'project_credits_container'}/> }
                     <TrackVisibility offset={50}><Footer currentPage={this.props.match.params.id} numberOfProjects={this.props.numberOfProjects} /></TrackVisibility>

@@ -666,3 +666,14 @@ footer
 {
     cursor: pointer;
 }
+
+.fadeOut{
+     opacity:0;
+     transition: opacity 0.1s;
+
+}
+.fadeIn{
+     opacity:1;
+     transition: opacity 0.3s;
+
+}

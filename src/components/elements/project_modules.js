@@ -54,8 +54,11 @@ export const ProjectCreditsModule = props => {
 export const ProjectDescriptionModule = props => {
   const { description, id, className } = props;
   return (
-    <div className={id} id={className}>
+
+    <div className={id} style={{zIndex: 1000}} id={className}>
       <p>{description}</p>
     </div>
+
+
   );
 };

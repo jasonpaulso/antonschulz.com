@@ -6953,6 +6953,20 @@ react-fade-image@^1.2.4:
   dependencies:
     lodash.throttle "^4.1.1"
 
+react-fade-in@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/react-fade-in/-/react-fade-in-0.1.5.tgz#cb487e2f695ed536ec29d80b963570e29276b4df"
+
+react-fade@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-fade/-/react-fade-1.1.1.tgz#41f11ba8da671d2ac045f213eac3c1b314fc58fe"
+  dependencies:
+    minify-css-string "^1.0.0"
+
+react-fadethrough@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-fadethrough/-/react-fadethrough-2.0.0.tgz#73dca1c7453b56651920cd2b966055405aa953b2"
+
 react-form@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-form/-/react-form-3.0.4.tgz#cb303e72c8f88952aa94ee35bb6a977041b409cd"
