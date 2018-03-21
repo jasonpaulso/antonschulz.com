@@ -153,7 +153,7 @@ class Project extends Component {
   };
 
   updateIndividualProject = closure => {
-    this.setState({id: this.props.match.params.id,},() => {closure(this.state.id, true); });
+    this.setState({id: this.props.match.params.id, project: this.props.project},() => {closure(this.state.id, true); });
   };
 
   render = () => {
@@ -174,7 +174,7 @@ class Project extends Component {
                     <ProjectDescriptionModule description={project.description} className={'project_blurb_container'} id={'project_blurb_container'}/>
                     <ProjectGalleryModule images={project_images} className={'project_heroes'} imageClassName={'project_hero_container'}/>
                     {project.credits && project.credits.length && <ProjectCreditsModule credits={project.credits} className={'project_credits_container'}/> }
-                    <TrackVisibility offset={50}><Footer currentPage={this.props.match.params.id} pages={this.state.projects.length} /></TrackVisibility>
+                    <TrackVisibility offset={50}><Footer currentPage={this.props.match.params.id} numberOfProjects={this.props.numberOfProjects} /></TrackVisibility>
                   </section>
                 </div>
             </span>

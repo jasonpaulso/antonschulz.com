@@ -66,7 +66,7 @@ class Home extends Component {
     const projectRow = (project, index) => {
 
       let projectImageName = project.name.replace(/\W/g, '').toLowerCase()
-      let projectImageSource = `./images/${projectImageName}/${projectImageName}_0.jpg`
+      let projectImageSource = `../images/${projectImageName}/${projectImageName}_0.jpg`
 
       return (
         <span key={project.name}>

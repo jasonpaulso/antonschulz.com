@@ -34,11 +34,13 @@ class Footer extends Component {
   loadFooter = () => {
     const radix = 10;
     const currentPage = parseInt(this.props.currentPage, radix);
-    const numberOfPages = this.props.pages;
+    const numberOfPages = this.props.numberOfProjects;
+    const nextPage = this.props.numberOfProjects > currentPage + 1 ? currentPage + 1 : 0
+    console.log(currentPage, numberOfPages)
     this.setState({
-      next: this.props.pages > currentPage + 1 ? currentPage + 1 : 0,
+      next: this.props.numberOfProjects > currentPage + 1 ? currentPage + 1 : 0,
       previous:
-        this.props.currentPage - 1 >= 0 ? currentPage - 1 : numberOfPages - 1,
+        currentPage - 1 >= 0 ? currentPage - 1 : numberOfPages,
     });
     this.handleVisibilityChange(false);
   };
