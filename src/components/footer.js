@@ -40,7 +40,7 @@ class Footer extends Component {
     this.setState({
       next: this.props.numberOfProjects > currentPage + 1 ? currentPage + 1 : 0,
       previous:
-        currentPage - 1 >= 0 ? currentPage - 1 : numberOfPages,
+        currentPage - 1 >= 0 ? currentPage - 1 : numberOfPages - 1,
     });
     this.handleVisibilityChange(false);
   };
