@@ -4,6 +4,7 @@ import About from './components/about';
 import Home from './components/home';
 import Project from './components/single_project';
 import Fade from 'react-reveal/Fade';
+import projectJSON from './db/project_db.json';
 
 import viewportunitsfix from 'viewport-units-buggyfill';
 
@@ -124,6 +125,7 @@ class App extends Component {
                 <Home
                   backgroundHandler={this.handleBackgroundRender.bind(this)}
                   onClearBackground={this.clearBackground.bind(this)}
+                  projects={projectJSON.projects}
                   {...props}
                 />
               )}
@@ -137,6 +139,7 @@ class App extends Component {
                   onClearBackground={this.clearBackground.bind(this)}
                   timestamp={new Date().toString()}
                   location={props.location}
+                  project={projectJSON.projects[props.match.params.id]}
                   {...props}
                 />
               )}

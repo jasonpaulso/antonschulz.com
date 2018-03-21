@@ -3,7 +3,8 @@ import DocumentTitle from 'react-document-title';
 import Navigation from './navigation';
 import { Link } from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
-import firebase from '../db/firebase';
+// import firebase from '../db/firebase';
+// import projectJSON from '../db/project_db.json';
 
 class Home extends Component {
   constructor() {
@@ -17,10 +18,11 @@ class Home extends Component {
   }
 
   componentDidMount = () => {
+
     window.previousLocation = this.props.location;
     const isNonTouch =
       document.getElementById('document').className === ' non-touch';
-    console.log(isNonTouch);
+    // console.log(isNonTouch);
     if (!isNonTouch) {
       // eslint-disable-next-line
       () => {
@@ -30,19 +32,23 @@ class Home extends Component {
       };
     }
 
-    const projectsRef = firebase.database().ref('projects');
-    projectsRef.on('value', snapshot => {
-      let projects = snapshot.val();
-      this.setState({
-        projects: projects,
-      });
-    });
+    // const projectsRef = firebase.database().ref('projects');
+    // projectsRef.on('value', snapshot => {
+    //   let projects = snapshot.val();
+    //   this.setState({
+    //     projects: projects,
+    //   });
+    // });
+
+    this.setState({
+      projects: this.props.projects
+    })
   };
 
   componentWillMount = () => {
     const isNonTouch =
       document.getElementById('document').className === ' non-touch';
-    console.log(isNonTouch);
+    // console.log(isNonTouch);
     if (!isNonTouch) {
       // eslint-disable-next-line
       () => {
@@ -58,12 +64,16 @@ class Home extends Component {
     const { onClearBackground, backgroundHandler } = this.props;
 
     const projectRow = (project, index) => {
+
+      let projectImageName = project.name.replace(/\W/g, '').toLowerCase()
+      let projectImageSource = `./images/${projectImageName}/${projectImageName}_0.jpg`
+
       return (
         <span key={project.name}>
           <Link
-            to={{ pathname: `/projects/${index}` }}
+            to={{ pathname: `/projects/${index}`}}
             onMouseEnter={
-              isTouch ? null : () => backgroundHandler(project.hero)
+              isTouch ? null : () => backgroundHandler(projectImageSource)
             }
           >
             {project.name}

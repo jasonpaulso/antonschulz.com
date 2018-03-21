@@ -1,0 +1,74 @@
+{
+  "projects" : [ {
+    "credits" : [ {
+      "name" : "Paul Miller",
+      "title" : "Creative Director"
+    }, {
+      "name" : "Liz Tran",
+      "title" : "Digital Designer"
+    } ],
+    "description" : "With the help of neuroscience and wearable technology Thync is a product that can shift the state of mind in just minutes. Controlled with a smartphone app, strategically placed electrodes send small electric waveforms to activate specific neural pathways that will make you feel more “calm” or 'energized'. The concept of the shift is visualized in a diagonal stroke, represented with the lowercase ‘Y’ in the brand name. Called the “shift” bar, this simple but strong symbol represents the point of entry or the crossing over from one mindset to another.",
+    "hero" : "https://firebasestorage.googleapis.com/v0/b/anton-schulz.appspot.com/o/Thync%2FThync_0.jpg?alt=media&token=91c7d7e5-1101-4161-888c-474b4eae1eb8",
+    "name" : "Thync",
+    "number_of_images" : 14
+  }, {
+    "credits" : [ {
+      "name" : "Tish Evangelista",
+      "title" : "Creative Director"
+    }, {
+      "name" : "Meghan Berckes",
+      "title" : "Design Director"
+    } ],
+    "description" : "From a unique collaboration between a renowned tea expert and a coffee-loving entrepreneur comes Fogdog. An innovative new cold brew technology that extracts the flavors, oils and sugars from coffee beans and tea leaves without any bitterness or acidity. The result is a smooth, creamy cold brew that’s naturally delicious without any additives. This churning process informed the marbled graphics with a bold and unique look that helps differentiate the brand.",
+    "hero" : "https://firebasestorage.googleapis.com/v0/b/anton-schulz.appspot.com/o/Fogdog%2FFogdog_0.jpg?alt=media&token=2b623633-3b67-4141-80b0-f0245a58f8e7",
+    "name" : "Fogdog",
+    "number_of_images" : 6
+  }, {
+    "credits" : [ {
+      "name" : "Rishi Shourie",
+      "title" : "Creative Director"
+    }, {
+      "name" : "Molly Maeda",
+      "title" : "Designer"
+    } ],
+    "description" : "The unique technology behind Wally uses the copper wiring inside the walls to create a wireless network for strategically placed moisture detectors around the house. Hence the name Wall-y, which further inspired the two extended ‘L’s that represents a wall and the space inside. The resulting identity is warm and friendly, reinforcing the approachable and humanistic attributes of the brand.",
+    "hero" : "https://firebasestorage.googleapis.com/v0/b/anton-schulz.appspot.com/o/Wally%2FWally_0.jpg?alt=media&token=a4867605-748d-44fc-aec6-dc2ee63247f4",
+    "name" : "Wally",
+    "number_of_images" : 10
+  }, {
+    "credits" : [ {
+      "name" : "Tish Evangelista",
+      "title" : "Creative Director"
+    }, {
+      "name" : "Will Geddes",
+      "title" : "Design Director"
+    } ],
+    "description" : "The first product coming out from this Bay Area startup was a gesture control ring that enables beautiful and touchless interactions with connected devices. These gestures directly inspired the organic and delicate shapes of this dynamic identity, that aims to connect technology with humanity in an effortless way.",
+    "hero" : "https://firebasestorage.googleapis.com/v0/b/anton-schulz.appspot.com/o/Nod%2FNod_0.jpg?alt=media&token=944af6a6-b513-49bf-b0e5-f70b8f4fad3f",
+    "name" : "Nod",
+    "number_of_images" : 9
+  }, {
+    "credits" : [ {
+      "name" : "Paul Miller",
+      "title" : "Creative Director"
+    }, {
+      "name" : "Matt Carvalho",
+      "title" : "Design Director"
+    }, {
+      "name" : "Kyle Macy",
+      "title" : "Senior Designer"
+    }, {
+      "name" : "Natalia Bivol",
+      "title" : "Designer"
+    } ],
+    "description" : "This beloved salad restaurant from San Francisco was created i 2005 with the goal to serve healthy food with high-quality and locally sourced ingredients. The inspiration for the rebranding came from the rich variety of produce Mixt uses through the seasons, and the iconic mixing bowls that the chefs uses to mix your salad. The work covers every touchpoint from identity and branding, to photograph and web.",
+    "hero" : "https://firebasestorage.googleapis.com/v0/b/anton-schulz.appspot.com/o/Mixt%2FMIXT_0.jpg?alt=media&token=bb6cdd1f-ab76-4580-bb39-f88b0e42f10e",
+    "name" : "Mixt",
+    "number_of_images" : 18
+  }, {
+    "description" : "When a dear family friend on Sri Lanka set out to start his own motor rickshaw business I wanted to help him stand out in the new and booming tourism economy. With a modern and friendly brand that feels both professional and approachable, Sushantha takes his customers from both a-to-b, and to unforgettable sightseeing spots around the south-west coast of this beautiful island nation.",
+    "hero" : "https://firebasestorage.googleapis.com/v0/b/anton-schulz.appspot.com/o/Sushanthas%2FSushanthas_0.jpg?alt=media&token=8341c2ac-6f13-4243-b3a3-36b2e125d590",
+    "name" : "Sushantha’s",
+    "number_of_images" : 5
+  } ]
+}

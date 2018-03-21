@@ -22,14 +22,16 @@ export const ProjectGalleryModule = props => {
 
 export const ProjectGalleryImage = props => {
   const { imageUrl, imageClassName } = props;
-  console.log(imageUrl)
+
   return (
     <div className={imageClassName}>
+        <Fade>
           <ProgressiveImage src={imageUrl} placeholder={null}>
         {(src, loading) => (
             <img style={{ opacity: loading ? 0 : 1, width:'100%' }} src={src} alt={src}/>
         )}
-      </ProgressiveImage>   
+      </ProgressiveImage> 
+      </Fade>  
     </div>
   );
 };
@@ -51,7 +53,6 @@ export const ProjectCreditsModule = props => {
 
 export const ProjectDescriptionModule = props => {
   const { description, id, className } = props;
-  console.log(description)
   return (
     <div className={id} id={className}>
       <p>{description}</p>

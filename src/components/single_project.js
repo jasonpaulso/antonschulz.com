@@ -5,7 +5,7 @@ import Navigation from './navigation';
 import {} from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
 import TrackVisibility from 'react-on-screen';
-import firebase from '../db/firebase';
+// import firebase from '../db/firebase';
 import { Redirect } from 'react-router-dom';
 import { ProjectGalleryModule, ProjectDescriptionModule, ProjectCreditsModule } from './elements/project_modules';
 
@@ -32,19 +32,29 @@ class Project extends Component {
   };
 
   fetchProjects = closure => {
-    const projectsRef = firebase.database().ref('projects');
-    projectsRef.on('value', snapshot => {
-      let projects = snapshot.val();
-      this.setState(
+    
+    // const projectsRef = firebase.database().ref('projects');
+    // projectsRef.on('value', snapshot => {
+    //   let projects = snapshot.val();
+    //   this.setState(
+    //     {
+    //       id: this.props.match.params.id,
+    //       projects: projects,
+    //     },
+    //     () => {
+    //       closure(this.props.match.params.id);
+    //     }
+    //   );
+    // });
+    this.setState(
         {
           id: this.props.match.params.id,
-          projects: projects,
+          project: this.props.project,
         },
         () => {
           closure(this.props.match.params.id);
         }
       );
-    });
   };
 
   setGlobals = () => {
@@ -53,31 +63,67 @@ class Project extends Component {
   };
 
   loadIndividualProject = (projectId, navLinkClicked) => {
-    this.setState(
-      {
-        project: this.state.projects[this.state.id],
-      },
-      () => {
-        if (!this.state.project) {
+    // this.setState(
+    //   {
+    //     project: this.state.projects[this.state.id],
+    //   },
+    //   () => {
+
+    //     if (!this.state.project) {
+    //       this.setState({
+    //         navigateFallback: true
+    //       }, () => {
+    //         return
+    //       })
+    //     } else {
+    //       this.loadProjectImages(this.state.project)
+    //       if (!this.props.backGroundIsSet || navLinkClicked) {
+    //         this.props.backgroundHandler(this.state.project.hero);
+    //       }
+    //       window.scrollTo(0, 0);
+    //       document.documentElement.style.overflow = 'auto';
+    //     }
+        
+    //   }
+    // );
+      if (!this.state.project) {
           this.setState({
             navigateFallback: true
           }, () => {
             return
           })
         } else {
+          this.loadProjectImages(this.state.project)
           if (!this.props.backGroundIsSet || navLinkClicked) {
             this.props.backgroundHandler(this.state.project.hero);
           }
           window.scrollTo(0, 0);
           document.documentElement.style.overflow = 'auto';
         }
-        
-      }
-    );
   };
 
+  loadProjectImages(project) {
+      let projectNumberOfImages = project.number_of_images
+      let projectImageName = project.name.replace(/\W/g, '').toLowerCase()
+      let images = []
+
+      for (var i = 1; i <= projectNumberOfImages; i++) {
+        let projectImageSource = `/images/${projectImageName}/${projectImageName}_${i}.jpg`
+        images.push(projectImageSource)
+      }
+
+      this.setState({
+        project_images: images
+      }, () => {
+        // console.log(this.state.project_images)
+      })
+
+
+  }
+
+
   handleScroll = event => {
-    // this.handleBackgroundHide()
+    this.handleBackgroundHide()
     this.handleMobileNavColorChangeOnScroll()
   };
 
@@ -111,14 +157,14 @@ class Project extends Component {
   };
 
   render = () => {
-    const { project, navigateFallback } = this.state;
+    const { project, navigateFallback, project_images } = this.state;
     if (navigateFallback) {
       return <Redirect to="/" push={true} />
     }
     return (
       <span>
         {project &&
-          project.images && project.description && project.name &&(
+          project_images && project.description && project.name &&(
             <span className={'project_outer_container'}>
                 <DocumentTitle title={`Anton Schulz | ${project.name}`} />
                 <Navigation backButton={false} />
@@ -126,7 +172,7 @@ class Project extends Component {
                   <section className={'project_container'}>
                     <div className={'project_title_container'}><Fade><h1>{project.name}</h1></Fade></div>
                     <ProjectDescriptionModule description={project.description} className={'project_blurb_container'} id={'project_blurb_container'}/>
-                    <ProjectGalleryModule images={project.images} className={'project_heroes'} imageClassName={'project_hero_container'}/>
+                    <ProjectGalleryModule images={project_images} className={'project_heroes'} imageClassName={'project_hero_container'}/>
                     {project.credits && project.credits.length && <ProjectCreditsModule credits={project.credits} className={'project_credits_container'}/> }
                     <TrackVisibility offset={50}><Footer currentPage={this.props.match.params.id} pages={this.state.projects.length} /></TrackVisibility>
                   </section>
